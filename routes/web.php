@@ -20,3 +20,19 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::get('/jenis-surat', function () {
+    return view('jenisSurat');
+});
+
+Route::get('/surat-masuk', function () {
+    return view('suratKeluar');
+});
+
+Route::get('/surat-keluar', function () {
+    return view('suratKeluar');
+});
+
+Route::get('/arsip', function () {
+    return view('arsip');
+});

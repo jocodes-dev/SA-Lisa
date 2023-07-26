@@ -14,35 +14,35 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link active">
+          <a href="/dashboard" class="nav-link active">
             <i class="nav-icon fas fa-th"></i>
             <p>Dashboard</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
+          <a href="surat-masuk" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Surat Masuk</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
+          <a href="surat-keluar" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Surat Keluar</p>
           </a>
         </li>
        
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
+          <a href="jenis-surat" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Jenis Surat</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="pages/widgets.html" class="nav-link">
+          <a href="arsip" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Arsip</p>
           </a>
