@@ -23,18 +23,30 @@
         <li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
-            <p>Dashboard</p>
+            <p>Surat Masuk</p>
           </a>
         </li>
 
         <li class="nav-item">
           <a href="pages/widgets.html" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
-            <p>Dashboard</p>
+            <p>Surat Keluar</p>
           </a>
         </li>
        
-       
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>Jenis Surat</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="pages/widgets.html" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>Arsip</p>
+          </a>
+        </li>
       
         
         
