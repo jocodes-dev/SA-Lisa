@@ -7,7 +7,7 @@ Sistem Arsip Surat Client LISA
 copy and jalankan kode di bawah ini di terminal komputer anda
 
 ```bash
-git clone https://github.com/Divta-Suryawan/cetak-surat-palupi.git
+git clone https://github.com/jocodes-dev/SA-Lisa.git
 ```
 
 install commposser di komputer anda
