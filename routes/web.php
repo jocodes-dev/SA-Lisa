@@ -26,7 +26,7 @@ Route::get('/jenis-surat', function () {
 });
 
 Route::get('/surat-masuk', function () {
-    return view('suratKeluar');
+    return view('suratMasuk');
 });
 
 Route::get('/surat-keluar', function () {
