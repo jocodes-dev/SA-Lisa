@@ -54,12 +54,14 @@
                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                         aria-label="No. Surat: activate to sort column ascending">No. Surat</th>
                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Tanggal Masuk Surat: activate to sort column ascending">Tanggal Masuk Surat
+                                        aria-label="Tanggal Masuk Surat: activate to sort column ascending">Tanggal
+                                        Masuk Surat
                                     </th>
                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                         aria-label="Perihal: activate to sort column ascending">Perihal</th>
                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="File Surat Masuk: activate to sort column ascending">File Surat Masuk</th>
+                                        aria-label="File Surat Masuk: activate to sort column ascending">File Surat
+                                        Masuk</th>
                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                         aria-label="Asal Surat: activate to sort column ascending">Asal Surat</th>
                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
