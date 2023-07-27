@@ -1,222 +1,123 @@
 @extends('layouts/base')
 @section('content')
-<div class="row mb-2">
-    <div class="col-sm-6">
-        <h1 class="m-0">Surat Masuk</h1>
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Surat Masuk</h1>
+        </div>
     </div>
-</div>
 @endsection
 @section('main-content')
-<div class="col-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dt-buttons btn-group flex-wrap"> <button
-                                class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>Copy</span></button> <button
-                                class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>CSV</span></button> <button
-                                class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>Excel</span></button> <button
-                                class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>PDF</span></button> <button
-                                class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1"
-                                type="button"><span>Print</span></button>
-                            <div class="btn-group"><button
-                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                    tabindex="0" aria-controls="example1" type="button" aria-haspopup="true"
-                                    aria-expanded="false"><span>Column visibility</span></button></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                    class="form-control form-control-sm" placeholder=""
-                                    aria-controls="example1"></label></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                            aria-describedby="example1_info">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                        colspan="1" aria-sort="ascending"
-                                        aria-label="No: activate to sort column descending">No</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Nama User: activate to sort column ascending">Nama User</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="No. Surat: activate to sort column ascending">No. Surat</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Tanggal Masuk Surat: activate to sort column ascending">Tanggal
-                                        Masuk Surat
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Perihal: activate to sort column ascending">Perihal</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="File Surat Masuk: activate to sort column ascending">File Surat
-                                        Masuk</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Asal Surat: activate to sort column ascending">Asal Surat</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Action: activate to sort column ascending">Action
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 1.0</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.7</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 1.5</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 2.0</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 3.0</td>
-                                    <td>Win 2k+ / OSX.3+</td>
-                                    <td>1.9</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Camino 1.0</td>
-                                    <td>OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Camino 1.5</td>
-                                    <td>OSX.3+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Netscape 7.2</td>
-                                    <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                    <td>1.7</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Netscape Browser 8</td>
-                                    <td>Win 98SE+</td>
-                                    <td>1.7</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Netscape Navigator 9</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Mozilla 1.0</td>
-                                    <td>Win 95+ / OSX.1+</td>
-                                    <td>1</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">Rendering engine</th>
-                                    <th rowspan="1" colspan="1">Browser</th>
-                                    <th rowspan="1" colspan="1">Platform(s)</th>
-                                    <th rowspan="1" colspan="1">Engine version</th>
-                                    <th rowspan="1" colspan="1">CSS grade</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10
-                            of 57 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="example1_previous"><a
-                                        href="#" aria-controls="example1" data-dt-idx="0" tabindex="0"
-                                        class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="example1"
-                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                <li class="paginate_button page-item next" id="example1_next"><a href="#"
-                                        aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                                </li>
-                            </ul>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Tabel Data Surat Masuk</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div id="surat-masuk_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="surat-masuk" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+                                aria-describedby="surat-masuk_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="surat-masuk" rowspan="1"
+                                            colspan="1" aria-sort="ascending"
+                                            aria-label="No: activate to sort column descending">No</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="Nama User: activate to sort column ascending">Nama User</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="No. Surat: activate to sort column ascending">No. Surat</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="Tanggal Masuk Surat: activate to sort column ascending">Tanggal
+                                            Masuk Surat
+                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="Perihal: activate to sort column ascending">Perihal</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="File Surat Masuk: activate to sort column ascending">File Surat</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="Asal Surat: activate to sort column ascending">Asal Surat</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="Action: activate to sort column ascending">Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="dtr-control sorting_1" tabindex="0">1</td>
+                                        <td>Aziz</td>
+                                        <td>144/01/PLP-VII/2023</td>
+                                        <td>21/07/2023</td>
+                                        <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>A</td>
+                                        <td>Lurah AXC</td>
+                                        <td>hapus</td>
+                                    </tr>
+                                    <tr >
+                                        <td class="dtr-control sorting_1" tabindex="0">2</td>
+                                        <td>Budi</td>
+                                        <td>144/02/PLP-VII/2023</td>
+                                        <td>22/07/2023</td>
+                                        <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>A</td>
+                                        <td>Lurah AXC</td>
+                                        <td>hapus</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="dtr-control sorting_1" tabindex="0">3</td>
+                                        <td>Candra</td>
+                                        <td>144/03/PLP-VII/2023</td>
+                                        <td>23/07/2023</td>
+                                        <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>A</td>
+                                        <td>Lurah AXC</td>
+                                        <td>hapus</td>
+                                    </tr>
+                                    <tr >
+                                        <td class="dtr-control sorting_1" tabindex="0">4</td>
+                                        <td>David</td>
+                                        <td>144/04/PLP-VII/2023</td>
+                                        <td>24/07/2023</td>
+                                        <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>A</td>
+                                        <td>Lurah AXC</td>
+                                        <td>hapus</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">No</th>
+                                        <th rowspan="1" colspan="1">Nama User</th>
+                                        <th rowspan="1" colspan="1">No. Surat</th>
+                                        <th rowspan="1" colspan="1">Tanggal Masuk Surat</th>
+                                        <th rowspan="1" colspan="1">Perihal</th>
+                                        <th rowspan="1" colspan="1">File Surat</th>
+                                        <th rowspan="1" colspan="1">Asal Surat</th>
+                                        <th rowspan="1" colspan="1">Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
+        <!-- /.card -->
     </div>
-    <!-- /.card -->
-</div>
+@endsection
+@section('js-content')
+    
+    <script>
+        $(function () {
+            $("#surat-masuk").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                //   "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#surat-masuk_wrapper .col-md-6:eq(0)');
+        });
+
+    </script>
 @endsection
