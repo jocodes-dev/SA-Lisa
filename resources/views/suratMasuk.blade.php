@@ -29,6 +29,8 @@
                                         <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
                                             aria-label="No. Surat: activate to sort column ascending">No. Surat</th>
                                         <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
+                                            aria-label="No. Surat: activate to sort column ascending">Jenis Surat</th>
+                                        <th class="sorting" tabindex="0" aria-controls="surat-masuk" rowspan="1" colspan="1"
                                             aria-label="Tanggal Masuk Surat: activate to sort column ascending">Tanggal
                                             Masuk Surat
                                         </th>
@@ -48,8 +50,9 @@
                                         <td class="dtr-control sorting_1" tabindex="0">1</td>
                                         <td>Aziz</td>
                                         <td>144/01/PLP-VII/2023</td>
+                                        <td>Surat Keterangan Tidak Mampu</td>
                                         <td>21/07/2023</td>
-                                        <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>Membuat Surat Keterangan tidak mampu </td>
                                         <td>A</td>
                                         <td>Lurah AXC</td>
                                         <td>hapus</td>
@@ -58,8 +61,9 @@
                                         <td class="dtr-control sorting_1" tabindex="0">2</td>
                                         <td>Budi</td>
                                         <td>144/02/PLP-VII/2023</td>
-                                        <td>22/07/2023</td>
                                         <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>22/07/2023</td>
+                                        <td>Membuat Surat Keterangan tidak mampu </td>
                                         <td>A</td>
                                         <td>Lurah AXC</td>
                                         <td>hapus</td>
@@ -68,8 +72,9 @@
                                         <td class="dtr-control sorting_1" tabindex="0">3</td>
                                         <td>Candra</td>
                                         <td>144/03/PLP-VII/2023</td>
-                                        <td>23/07/2023</td>
                                         <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>23/07/2023</td>
+                                        <td>Membuat Surat Keterangan tidak mampu </td>
                                         <td>A</td>
                                         <td>Lurah AXC</td>
                                         <td>hapus</td>
@@ -78,8 +83,9 @@
                                         <td class="dtr-control sorting_1" tabindex="0">4</td>
                                         <td>David</td>
                                         <td>144/04/PLP-VII/2023</td>
-                                        <td>24/07/2023</td>
                                         <td>Surat Keterangan Kurang Mampu</td>
+                                        <td>24/07/2023</td>
+                                        <td>Membuat Surat Keterangan tidak mampu </td>
                                         <td>A</td>
                                         <td>Lurah AXC</td>
                                         <td>hapus</td>
@@ -90,6 +96,7 @@
                                         <th rowspan="1" colspan="1">No</th>
                                         <th rowspan="1" colspan="1">Nama User</th>
                                         <th rowspan="1" colspan="1">No. Surat</th>
+                                        <th rowspan="1" colspan="1">Jenis Surat</th>
                                         <th rowspan="1" colspan="1">Tanggal Masuk Surat</th>
                                         <th rowspan="1" colspan="1">Perihal</th>
                                         <th rowspan="1" colspan="1">File Surat</th>
