@@ -14,35 +14,35 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item">
-          <a href="/dashboard" class="nav-link active">
+          <a href="/dashboard" id="dashboard" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Dashboard</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="surat-masuk" class="nav-link">
+          <a href="surat-masuk" id="suratMasuk" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Surat Masuk</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="surat-keluar" class="nav-link">
+          <a href="surat-keluar" id="suratKeluar" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Surat Keluar</p>
           </a>
         </li>
        
         <li class="nav-item">
-          <a href="jenis-surat" class="nav-link">
+          <a href="jenis-surat" id="jenisSurat" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Jenis Surat</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="arsip" class="nav-link">
+          <a href="arsip" id="arsip" class="nav-link">
             <i class="nav-icon fas fa-th"></i>
             <p>Arsip</p>
           </a>
@@ -56,3 +56,26 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+<script>
+  const getId = (id) => document.getElementById(id)
+
+  const checkActiveMenu = () => {
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const routePath = url.pathname;   // route name
+
+    if (routePath === '/dashboard') {
+      getId('dashboard').classList.add('active')
+    } else if(routePath === '/surat-masuk') {
+      getId('suratMasuk').classList.add('active')
+    } else if (routePath === '/surat-keluar') {
+      getId('suratKeluar').classList.add('active')
+    } else if (routePath === '/jenis-surat') {
+      getId('jenisSurat').classList.add('active')
+    } else if (routePath === '/arsip') {
+      getId('arsip').classList.add('active')
+    }
+  }
+  checkActiveMenu()
+
+</script>
