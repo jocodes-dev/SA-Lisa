@@ -10,6 +10,6 @@ class JenisSuratModel extends Model
     use HasFactory;
     protected $table = 'tb_jenis_surat';
     protected $fillable = [
-        'id' , 'uuid' , 'jenis_surat'
+        'id' , 'uuid' , 'jenis_surat', 'created_at', 'updated_at'
     ];
 }

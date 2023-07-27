@@ -35,7 +35,7 @@ class JenisSuratController extends Controller
                 'jenis_surat' => 'required'
             ],
             [
-                'jenis_surat.required' => 'Form nama tidak boleh kosong'
+                'jenis_surat.required' => 'Form jenis surat tidak boleh kosong'
             ]
         );
 
@@ -100,7 +100,7 @@ class JenisSuratController extends Controller
                 'jenis_surat' => 'required'
             ],
             [
-                'jenis_surat.required' => 'jenis surat tidak boleh kosong'
+                'jenis_surat.required' => 'Form jenis surat tidak boleh kosong'
             ]
         );
 
@@ -114,8 +114,7 @@ class JenisSuratController extends Controller
         }
 
         try {
-            $data = JenisSuratModel::where('uuid', $uuid)->first();
-            $data->uuid = Uuid::uuid4()->toString();
+            $data = JenisSuratModel::where('uuid', $uuid)->firstOrFail();
             $data->jenis_surat = $request->input('jenis_surat');
             $data->save();
         } catch (\Throwable $th) {
