@@ -36,3 +36,7 @@ Route::get('/surat-keluar', function () {
 Route::get('/arsip', function () {
     return view('arsip');
 });
+
+Route::get('/login', function () {
+    return view('login');
+});
