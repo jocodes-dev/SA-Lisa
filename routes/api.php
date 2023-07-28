@@ -28,7 +28,7 @@ Route::prefix('v1')->controller(JenisSuratController::class)->group(function () 
     Route::delete('/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/delete/{uuid}', 'deleteData');
 });
 
-Route::prefix('v1')->controller(SuratMasukController::class)->group(function () {
+Route::prefix('v2')->controller(SuratMasukController::class)->group(function () {
     Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk', 'getAllData');
     Route::post('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/create', 'createData');
     Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/get/{uuid}', 'getDataByUuid');

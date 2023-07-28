@@ -44,7 +44,11 @@ class SuratMasukController extends Controller
 
             ],
             [
-                'required' => 'Form tidak boleh kosong',
+                'no_surat.required' => 'Form tidak boleh kosong',
+                'id_jenis_surat.required' => 'Form tidak boleh kosong',
+                'tanggal_surat.required' => 'Form tidak boleh kosong',
+                'perihal.required' => 'Form tidak boleh kosong',
+                'asal_surat.required' => 'Form tidak boleh kosong',
                 'file_surat_masuk.required' =>'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
@@ -127,7 +131,11 @@ class SuratMasukController extends Controller
 
             ],
             [
-                'required' => 'Form tidak boleh kosong',
+                'no_surat.required' => 'Form tidak boleh kosong',
+                'id_jenis_surat.required' => 'Form tidak boleh kosong',
+                'tanggal_surat.required' => 'Form tidak boleh kosong',
+                'perihal.required' => 'Form tidak boleh kosong',
+                'asal_surat.required' => 'Form tidak boleh kosong',
                 'file_surat_masuk.required' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
