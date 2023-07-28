@@ -44,12 +44,13 @@ class SuratMasukController extends Controller
 
             ],
             [
-                'no_surat.required' => 'Form tidak boleh kosong',
-                'id_jenis_surat.required' => 'Form tidak boleh kosong',
-                'tanggal_surat.required' => 'Form tidak boleh kosong',
-                'perihal.required' => 'Form tidak boleh kosong',
-                'asal_surat.required' => 'Form tidak boleh kosong',
-                'file_surat_masuk.required' =>'Ekstensi file harus png,jpg,pdf,docx,doc',
+                'no_surat.required' => 'Form no_surat tidak boleh kosong',
+                'id_jenis_surat.required' => 'Form id_jenis_surat tidak boleh kosong',
+                'tanggal_surat.required' => 'Form tanggal_surat tidak boleh kosong',
+                'perihal.required' => 'Form perihal tidak boleh kosong',
+                'asal_surat.required' => 'Form asal_surat tidak boleh kosong',
+                'file_surat_masuk.required' => 'Form  file_surat tidak boleh kosong',
+                'file_surat_masuk.mimes' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
 
@@ -131,12 +132,13 @@ class SuratMasukController extends Controller
 
             ],
             [
-                'no_surat.required' => 'Form tidak boleh kosong',
-                'id_jenis_surat.required' => 'Form tidak boleh kosong',
-                'tanggal_surat.required' => 'Form tidak boleh kosong',
-                'perihal.required' => 'Form tidak boleh kosong',
-                'asal_surat.required' => 'Form tidak boleh kosong',
-                'file_surat_masuk.required' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
+                'no_surat.required' => 'Form no_surat tidak boleh kosong',
+                'id_jenis_surat.required' => 'Form id_jenis_surat tidak boleh kosong',
+                'tanggal_surat.required' => 'Form tanggal_surat tidak boleh kosong',
+                'perihal.required' => 'Form perihal tidak boleh kosong',
+                'asal_surat.required' => 'Form asal_surat tidak boleh kosong',
+                'file_surat_masuk.required' => 'Form  file_surat tidak boleh kosong',
+                'file_surat_masuk.mimes' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
 
