@@ -16,7 +16,7 @@ class SuratMasukController extends Controller
 {
     public function getAllData()
     {
-        $data = SuratMasukModel::all();
+        $data = SuratMasukModel::with('jenis_surat')->get();
         if ($data->isEmpty()) {
             return response()->json([
                 'code' => 404,
@@ -25,7 +25,7 @@ class SuratMasukController extends Controller
         } else {
             return response()->json([
                 'code' => 200,
-                'message' => 'success get all data',
+                'message' => 'Success get all data',
                 'data' => $data
             ]);
         }
@@ -44,7 +44,8 @@ class SuratMasukController extends Controller
 
             ],
             [
-                'file_surat_masuk.required' =>'Hanya bisa mengupload dengan ektensi file png,jpg,pdf,docx,doc',
+                'required' => 'Form tidak boleh kosong',
+                'file_surat_masuk.required' =>'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
 
@@ -70,7 +71,7 @@ class SuratMasukController extends Controller
                 $extention= $file->getClientOriginalExtension();
                 $filename = 'SURAT_MASUK-'.Str::random(15).' '.$extention;
                 Storage::makeDirectory('uploads/SuratMasuk/');
-                $file->move(public_path('uploads/SuratMasuk'), $filename);
+                $file->move(public_path('uploads/SuratMasuk/'), $filename);
                 $data->file_surat_masuk = $filename;
             }
             $data->save();
@@ -106,7 +107,7 @@ class SuratMasukController extends Controller
         }else{
             return response()->json([
                 'code' => 200,
-                'message' => 'success get data by Uuid',
+                'message' => 'Success get data by Uuid',
                 'data' => $data
             ]);
         }
@@ -126,7 +127,8 @@ class SuratMasukController extends Controller
 
             ],
             [
-                'file_surat_masuk.required' => 'Hanya bisa mengupload dengan ektensi file png,jpg,pdf,docx,doc',
+                'required' => 'Form tidak boleh kosong',
+                'file_surat_masuk.required' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
 
@@ -149,8 +151,8 @@ class SuratMasukController extends Controller
                 $extention = $file->getClientOriginalExtension();
                 $filename = 'SURAT_MASUK-' . Str::random(15) . ' ' . $extention;
                 Storage::makeDirectory('uploads/SuratMasuk/');
-                $file->move(public_path('uploads/SuratMasuk'), $filename);
-                $old_file_path = public_path('uploads/SuratMasuk') . $data->file_surat_masuk;
+                $file->move(public_path('uploads/SuratMasuk/'), $filename);
+                $old_file_path = public_path('uploads/SuratMasuk/') . $data->file_surat_masuk;
                 if(file_exists($old_file_path)){
                     unlink($old_file_path);
                 }
@@ -190,7 +192,7 @@ class SuratMasukController extends Controller
                 ]);
             }
 
-            $filePath = 'uploads/SuratMasuk' . $data->file_surat_masuk;
+            $filePath = 'uploads/SuratMasuk/' . $data->file_surat_masuk;
             if(File::exists($filePath)){
                 File::delete($filePath);
             }

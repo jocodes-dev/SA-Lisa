@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('uuid');
             $table->string('id_user');
             $table->string('no_surat');
-            $table->string('id_jenis_surat');
+            $table->foreignId('id_jenis_surat')->constrained('tb_jenis_surat');
             $table->string('tanggal_surat');
             $table->text('perihal');
             $table->string('asal_surat');
