@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\SuratMasukController;
 use App\Http\Controllers\Api\JenisSuratController;
+use App\Http\Controllers\Api\SuratKeluarController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,5 +35,14 @@ Route::prefix('v2')->controller(SuratMasukController::class)->group(function () 
     Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/get/{uuid}', 'getDataByUuid');
     Route::post('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/update/{uuid}', 'updateDataByUuid');
     Route::delete('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/delete/{uuid}', 'deleteData');
+});
+
+
+Route::prefix('v3')->controller(SuratKeluarController::class)->group(function () {
+    Route::get('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar', 'getAllData');
+    Route::post('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/create', 'createData');
+    Route::get('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/get/{uuid}', 'getDataByUuid');
+    Route::post('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/update/{uuid}', 'updateDataByUuid');
+    Route::delete('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/delete/{uuid}', 'deleteData');
 });
 
