@@ -210,6 +210,7 @@ $(document).ready(function() {
         success: function(response) {
             console.log(response.data, '<-- response get jenis surat');
             populateSelectOptions(response.data)
+            populateSelectOptionsEditt(response.data)
         },
         error: function() {
             console.log("Failed to get data from server");
@@ -230,7 +231,7 @@ $(document).ready(function() {
     }
 
     // for update
-    function populateSelectOptions(data) {
+    function populateSelectOptionsEditt(data) {
         var select = $("#edit_id_jenis_surat");
         select.empty();
         for (var i = 0; i < data.length; i++) {
@@ -345,7 +346,7 @@ $(document).ready(function() {
         $('#loading-overlay').show();
         $.ajax({
             type: "POST",
-            url: `{{ url('${apiUrl}/update/${uuid}') }}`,
+            url: `{{ url('${apiUrl}/update/') }}/${uuid}`,
             data: formData,
             dataType: 'json',
             contentType: false,
@@ -397,6 +398,60 @@ $(document).ready(function() {
                 });
             }
         });
+    });
+});
+
+//delete
+$(document).on('click', '.delete-confirm', function(e) {
+    e.preventDefault();
+    var uuid = $(this).data('uuid');
+    Swal.fire({
+        title: 'Anda yakin ingin menghapus data ini?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Delete',
+        cancelButtonText: 'Cancel',
+        resolveButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `{{ url('${apiUrl}/delete/${uuid}') }}`,
+                type: 'DELETE',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "uuid": uuid
+                },
+                success: function(response) {
+                    if (response.code === 200) {
+                        Swal.fire({
+                            title: 'Data berhasil dihapus',
+                            icon: 'success',
+                            timer: 5000,
+                            showConfirmButton: true
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Gagal menghapus data',
+                            text: response.message,
+                            icon: 'error',
+                            timer: 5000,
+                            showConfirmButton: true
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Terjadi kesalahan',
+                        text: 'Gagal menghapus data',
+                        icon: 'error',
+                        timer: 5000,
+                        showConfirmButton: true
+                    });
+                }
+            });
+        }
     });
 });
 
