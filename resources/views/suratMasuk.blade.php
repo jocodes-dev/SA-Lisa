@@ -14,7 +14,7 @@
 </div>
 <div class="card">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold ">Data jenis surat</h6>
+        <h6 class="m-0 font-weight-bold ">Data surat masuk</h6>
         <button type="button" class="btn btn-outline-primary ml-auto" data-toggle="modal" data-target="#DivisiModal"
             id="#myBtn">
             Tambah Data
@@ -111,7 +111,6 @@
             <div class="modal-body">
                 <form id="formEdit" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT')
                     <input type="hidden" name="uuid" id="uuid">
                     <div class="form-group">
                         <label for="asal_surat">asal surat</label>
@@ -314,20 +313,19 @@ $(document).ready(function() {
  //edit
  $(document).on('click', '.edit-modal', function() {
     let uuid = $(this).data('uuid');
-    console.log(uuid, '<-- nilai uuid');
     $.ajax({
         url: `{{ url('${apiUrl}/get/${uuid}') }}`,
         type: 'GET',
         dataType: 'JSON',
         success: function(data) {
-            console.log(data, '<-- get dat aby uuid success');
             $('#uuid').val(data.data.uuid);
             $('#edit_asal_surat').val(data.data.asal_surat)
             $('#edit_no_surat').val(data.data.no_surat)
             $('#edit_perihal').val(data.data.perihal)
             $('#edit_tanggal_surat').val(data.data.tanggal_surat)
-            $('#edit_file_surat_masuk').val(data.data.file_surat_masuk)
+            $('#edit_id_jenis_surat').val(data.data.id_jenis_surat)
             $('#edit_id_user').val(data.data.id_user)
+            $('#edit_file_surat_masuk').val(data.data.file_surat_masuk)
             $('#EditModal').modal('show');
         },
         error: function() {
@@ -367,7 +365,6 @@ $(document).ready(function() {
                         showConfirmButton: true
                     });
                 } else {
-                    console.log(data);
                     $('#loading-overlay').hide();
                     Swal.fire({
                         title: 'Success',
