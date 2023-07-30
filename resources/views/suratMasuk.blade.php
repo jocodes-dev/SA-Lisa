@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label for="id_jenis_surat">jenis surat</label>
                             <select name="id_jenis_surat" id="id_jenis_surat" class="form-control">
-                                
+                                <option value="" disabled selected>-- select --</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -135,9 +135,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="file_surat_masuk">file surat masuk</label>
+                        <label for="">file surat masuk</label>
                         <input type="file" class="form-control" name="file_surat_masuk" id="edit_file_surat_masuk" placeholder="Input Here..">
+                        <label for="edit_file_surat_masuk" id="edit_file_surat_masuk-label"></label>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="file_surat_masuk">preview</label>
+                        <img src="" alt="" id="preview" class="w-100">
+                    </div>
+
                     <div class="form-group">
                         <label for="id_user">id_user</label>
                         <input type="text" class="form-control" name="id_user" id="edit_id_user" placeholder="Input Here..">
@@ -181,6 +188,9 @@ $(document).ready(function() {
                         <td>${item.tanggal_surat}</td>
                     
                         <td>
+                            <button class='btn btn-success download-link' data-filename="${item.file_surat_masuk}">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
                             <button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' data-uuid='${item.uuid}'> 
                                 <i class='fa fa-edit'></i>
                             </button> 
@@ -193,6 +203,22 @@ $(document).ready(function() {
             var table = $("#dataTable").DataTable();
             table.clear().draw();
             table.rows.add($(tableBody)).draw();
+
+            $(document).ready(function() {
+                $('.download-link').click(function(event) {
+                    event.preventDefault();
+
+                    var filename = $(this).data('filename');
+                    var downloadUrl = `{{ asset('uploads/suratMasuk/${filename}')}}`
+
+                    var link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = filename;
+                    link.click();
+                    link.remove();
+                });
+            });
+
         },
         error: function() {
             console.log("Failed to get data from server");
@@ -207,7 +233,6 @@ $(document).ready(function() {
         method: "GET",
         dataType: "json",
         success: function(response) {
-            console.log(response.data, '<-- response get jenis surat');
             populateSelectOptions(response.data)
             populateSelectOptionsEditt(response.data)
         },
@@ -219,7 +244,6 @@ $(document).ready(function() {
     // for create
     function populateSelectOptions(data) {
         var select = $("#id_jenis_surat");
-        select.empty();
         for (var i = 0; i < data.length; i++) {
             var option = $("<option>")
             .val(data[i].id)
@@ -310,22 +334,28 @@ $(document).ready(function() {
     });
 });
 
- //edit
- $(document).on('click', '.edit-modal', function() {
+//edit
+$(document).on('click', '.edit-modal', function() {
     let uuid = $(this).data('uuid');
     $.ajax({
         url: `{{ url('${apiUrl}/get/${uuid}') }}`,
         type: 'GET',
         dataType: 'JSON',
-        success: function(data) {
-            $('#uuid').val(data.data.uuid);
-            $('#edit_asal_surat').val(data.data.asal_surat)
-            $('#edit_no_surat').val(data.data.no_surat)
-            $('#edit_perihal').val(data.data.perihal)
-            $('#edit_tanggal_surat').val(data.data.tanggal_surat)
-            $('#edit_id_jenis_surat').val(data.data.id_jenis_surat)
-            $('#edit_id_user').val(data.data.id_user)
-            $('#edit_file_surat_masuk').val(data.data.file_surat_masuk)
+        success: function(response) {
+            $('#uuid').val(response.data.uuid);
+            $('#edit_asal_surat').val(response.data.asal_surat)
+            $('#edit_no_surat').val(response.data.no_surat)
+            $('#edit_perihal').val(response.data.perihal)
+            $('#edit_tanggal_surat').val(response.data.tanggal_surat)
+            $('#edit_id_jenis_surat').val(response.data.id_jenis_surat)
+            
+            $('#edit_file_surat_masuk').html(response.data.file_surat_masuk)
+            var filename = response.data.file_surat_masuk.split('/')
+            $('#edit_file_surat_masuk-label').text(filename)
+
+            $('#preview').attr('src', `{{ asset('uploads/suratMasuk/${response.data.file_surat_masuk}')}}`)
+            $('#edit_id_user').val(response.data.id_user)
+
             $('#EditModal').modal('show');
         },
         error: function() {
