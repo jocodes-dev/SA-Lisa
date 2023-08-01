@@ -75,7 +75,6 @@
                 <div class="modal-body">
                     <form id="formEdit" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <input type="hidden" name="uuid" id="uuid">
                         <div class="form-group">
                             <label for="jenis_surat">Jenis surat</label>

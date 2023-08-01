@@ -74,7 +74,7 @@ class SuratMasukController extends Controller
             if($request->hasFile('file_surat_masuk')){
                 $file= $request->file('file_surat_masuk');
                 $extention= $file->getClientOriginalExtension();
-                $filename = 'SURAT_MASUK-'.Str::random(15).' '.$extention;
+                $filename = 'SURAT_MASUK-'.Str::random(15) . '.' . $extention;
                 Storage::makeDirectory('uploads/SuratMasuk/');
                 $file->move(public_path('uploads/SuratMasuk/'), $filename);
                 $data->file_surat_masuk = $filename;
@@ -128,7 +128,7 @@ class SuratMasukController extends Controller
                 'tanggal_surat' => 'required|date',
                 'perihal' => 'required',
                 'asal_surat' => 'required',
-                'file_surat_masuk' => 'required|mimes:png,jpg,pdf,docx,doc|max:2048',
+                'file_surat_masuk' => 'mimes:png,jpg,pdf,docx,doc|max:2048',
 
             ],
             [
@@ -159,7 +159,7 @@ class SuratMasukController extends Controller
             if ($request->hasFile('file_surat_masuk')) {
                 $file = $request->file('file_surat_masuk');
                 $extention = $file->getClientOriginalExtension();
-                $filename = 'SURAT_MASUK-' . Str::random(15) . ' ' . $extention;
+                $filename = 'SURAT_MASUK-'.Str::random(15) . '.' . $extention;
                 Storage::makeDirectory('uploads/SuratMasuk/');
                 $file->move(public_path('uploads/SuratMasuk/'), $filename);
                 $old_file_path = public_path('uploads/SuratMasuk/') . $data->file_surat_masuk;
