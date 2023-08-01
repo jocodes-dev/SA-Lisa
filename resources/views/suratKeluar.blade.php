@@ -7,190 +7,190 @@
     </div>
 @endsection
 @section('main-content')
-<div class="col-12">
-    <div class="card">
-        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h3 class="card-title">Table Surat Keluar</h3>
-            <button type="button" class="btn btn-outline-primary ml-auto" data-toggle="modal" data-target="#DivisiModal"
-                id="btn-add">
-                Tambah Data
-            </button>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <div id="dataTables_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="dataTable" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tujuan Surat</th>
-                                    <th>No. Surat</th>
-                                    <th>Jenis Surat</th>
-                                    <th>Tanggal Keluar</th>
-                                    <th>Perihal</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                                
-                                <tr id="loading-row" style="display: none;">
-                                    <td colspan="9" class="text-center">
-                                        <i class="fa fa-spinner fa-spin"></i> Loading...
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h3 class="card-title">Table Surat Keluar</h3>
+                <button type="button" class="btn btn-outline-primary ml-auto" data-toggle="modal" data-target="#DivisiModal"
+                    id="btn-add">
+                    Tambah Data
+                </button>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div id="dataTables_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="dataTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Tujuan Surat</th>
+                                        <th>No. Surat</th>
+                                        <th>Jenis Surat</th>
+                                        <th>Tanggal Keluar</th>
+                                        <th>Perihal</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    
+                                    <tr id="loading-row" style="display: none;">
+                                        <td colspan="9" class="text-center">
+                                            <i class="fa fa-spinner fa-spin"></i> Loading...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
+        <!-- /.card -->
     </div>
-    <!-- /.card -->
-</div>
 
-{{-- modal create --}}
-<div class="modal fade" id="DivisiModal" tabindex="-1" role="dialog" aria-labelledby="DivisiModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="DivisiModalLabel">Tambah Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formTambah" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="uuid">
-                    <div class="form-group">
-                        <label for="asal_surat">Tujuan Surat:</label>
-                        <input type="text" class="form-control" id="asal_surat" name="asal_surat"
-                            placeholder="Tujuan Surat">
-                    </div>
-                    <div class="form-group">
-                        <label for="no_surat">No Surat:</label>
-                        <input type="text" class="form-control" name="no_surat" id="no_surat" placeholder="No Surat">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_jenis_surat">Jenis Surat:</label>
-                        <select class="form-control" name="id_jenis_surat" id="id_jenis_surat"
-                            placeholder="Jenis Surat">
-                            <!-- Fill the options dynamically using JavaScript -->
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tanggal_surat">Tanggal Surat Keluar:</label>
-                        <input id="tanggal_surat" name="tanggal_surat" type="date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="file_surat_keluar">Input File Surat</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="file_surat_keluar"
-                                    id="file_surat_keluar">
-                                <label class="custom-file-label" id="nama-surat-keluar" for="file_surat_keluar">Pilih
-                                    file</label>
-                            </div>
+    {{-- modal create --}}
+    <div class="modal fade" id="DivisiModal" tabindex="-1" role="dialog" aria-labelledby="DivisiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DivisiModalLabel">Tambah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formTambah" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="uuid">
+                        <div class="form-group">
+                            <label for="asal_surat">Tujuan Surat:</label>
+                            <input type="text" class="form-control" id="asal_surat" name="asal_surat"
+                                placeholder="Tujuan Surat">
                         </div>
-                        <span>format : Jpg,png,pdf,doc </span>
-                        <img src="" id="preview-add" class="mx-auto d-block pb-2"
-                            style="max-width: 300px; haight: 100px; padding-top: 23px;">
-                    </div>
-                    <div class="form-group">
-                        <label for="perihal">Perihal:</label>
-                        <textarea type="text" class="form-control" name="perihal" id="perihal"
-                            placeholder="Perihal"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_user">Id User</label>
-                        <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Input Here..">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-outline-primary btn-send">Submit</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
-
-
-{{-- MODAL EDIT --}}
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="EditModalLabel">Edit Surat Keluar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="formEdit" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="uuid" id="uuid">
-                    <div class="form-group">
-                        <label for="asal_surat">Tujuan Surat:</label>
-                        <input type="text" class="form-control" name="asal_surat" id="edit_asal_surat"
-                            placeholder="Input Here..">
-                    </div>
-                    <div class="form-group">
-                        <label for="no_surat">No Surat:</label>
-                        <input type="text" class="form-control" name="no_surat" id="edit_no_surat"
-                            placeholder="Input Here..">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_jenis_surat">Jenis Surat:</label>
-                        <select name="id_jenis_surat" id="edit_id_jenis_surat" class="form-control">
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tanggal_surat">Tanggal Surat Keluar:</label>
-                        <input type="date" class="form-control" name="tanggal_surat" id="edit_tanggal_surat"
-                            placeholder="Input Here..">
-                    </div>
-                    <div class="form-group">
-                        <label for="file_surat_keluar">Input File Surat</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="file_surat_keluar"
-                                    id="edit_file_surat_keluar">
-                                <label class="custom-file-label" id="edit_file_surat-label"
-                                    for="file_surat_keluar">Pilih file</label>
-                            </div>
+                        <div class="form-group">
+                            <label for="no_surat">No Surat:</label>
+                            <input type="text" class="form-control" name="no_surat" id="no_surat" placeholder="No Surat">
                         </div>
-                        <span>format : Jpg,png,pdf,doc </span>
-                        <img src="" id="preview-edit" class="mx-auto d-block pb-2"
-                            style="max-width: 300px; haight: 100px; padding-top: 23px;">
-                    </div>
-                    <div class="form-group">
-                        <label for="perihal">Perihal:</label>
-                        <textarea type="text" class="form-control" name="perihal" id="edit_perihal"
-                            placeholder="Input Here.." rows="3" style="height: 100px;"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="id_user">Id_User</label>
-                        <input type="text" class="form-control" name="id_user" id="edit_id_user"
-                            placeholder="Input Here..">
-                    </div>
+                        <div class="form-group">
+                            <label for="id_jenis_surat">Jenis Surat:</label>
+                            <select class="form-control" name="id_jenis_surat" id="id_jenis_surat"
+                                placeholder="Jenis Surat">
+                                <!-- Fill the options dynamically using JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_surat">Tanggal Surat Keluar:</label>
+                            <input id="tanggal_surat" name="tanggal_surat" type="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="file_surat_keluar">Input File Surat</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file_surat_keluar"
+                                        id="file_surat_keluar">
+                                    <label class="custom-file-label" id="nama-surat-keluar" for="file_surat_keluar">Pilih
+                                        file</label>
+                                </div>
+                            </div>
+                            <span>format : Jpg,png,pdf,doc </span>
+                            <img src="" id="preview-add" class="mx-auto d-block pb-2"
+                                style="max-width: 300px; haight: 100px; padding-top: 23px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="perihal">Perihal:</label>
+                            <textarea type="text" class="form-control" name="perihal" id="perihal"
+                                placeholder="Perihal"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_user">Id User</label>
+                            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Input Here..">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-primary btn-send">Submit</button>
+                </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                <button type="submit" form="formEdit" class="btn btn-outline-primary btn-update btn-update">Update
-                    Data</button>
-            </div>
-
         </div>
     </div>
-</div>
+    </div>
+
+
+    {{-- MODAL EDIT --}}
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="EditModalLabel">Edit Surat Keluar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEdit" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="uuid" id="uuid">
+                        <div class="form-group">
+                            <label for="asal_surat">Tujuan Surat:</label>
+                            <input type="text" class="form-control" name="asal_surat" id="edit_asal_surat"
+                                placeholder="Input Here..">
+                        </div>
+                        <div class="form-group">
+                            <label for="no_surat">No Surat:</label>
+                            <input type="text" class="form-control" name="no_surat" id="edit_no_surat"
+                                placeholder="Input Here..">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_jenis_surat">Jenis Surat:</label>
+                            <select name="id_jenis_surat" id="edit_id_jenis_surat" class="form-control">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_surat">Tanggal Surat Keluar:</label>
+                            <input type="date" class="form-control" name="tanggal_surat" id="edit_tanggal_surat"
+                                placeholder="Input Here..">
+                        </div>
+                        <div class="form-group">
+                            <label for="file_surat_keluar">Input File Surat</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="file_surat_keluar"
+                                        id="edit_file_surat_keluar">
+                                    <label class="custom-file-label" id="edit_file_surat-label"
+                                        for="file_surat_keluar">Pilih file</label>
+                                </div>
+                            </div>
+                            <span>format : Jpg,png,pdf,doc </span>
+                            <img src="" id="preview-edit" class="mx-auto d-block pb-2"
+                                style="max-width: 300px; haight: 100px; padding-top: 23px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="perihal">Perihal:</label>
+                            <textarea type="text" class="form-control" name="perihal" id="edit_perihal"
+                                placeholder="Input Here.." rows="3" style="height: 100px;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_user">Id_User</label>
+                            <input type="text" class="form-control" name="id_user" id="edit_id_user"
+                                placeholder="Input Here..">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" form="formEdit" class="btn btn-outline-primary btn-update btn-update">Update
+                        Data</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 <script>
     const Url = 'api/v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
@@ -237,6 +237,7 @@
                                 <td>${data.tanggal_surat}</td>
                                 <td>${data.perihal}</td>
                                 <td>
+                                    <button id="" data-uuid="${data.uuid}" class="btn btn-info"><i class="fas fa-download"></i></button>
                                     <button id="edit-modal" data-uuid="${data.uuid}" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
                                     <button id="delete-confirm" data-uuid="${data.uuid}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                 </td>
