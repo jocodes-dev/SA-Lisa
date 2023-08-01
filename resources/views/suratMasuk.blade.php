@@ -7,214 +7,481 @@
 </div>
 @endsection
 @section('main-content')
-<div class="col-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-6">
-                        <div class="dt-buttons btn-group flex-wrap"> <button
-                                class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>Copy</span></button> <button
-                                class="btn btn-secondary buttons-csv buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>CSV</span></button> <button
-                                class="btn btn-secondary buttons-excel buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>Excel</span></button> <button
-                                class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0"
-                                aria-controls="example1" type="button"><span>PDF</span></button> <button
-                                class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1"
-                                type="button"><span>Print</span></button>
-                            <div class="btn-group"><button
-                                    class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis"
-                                    tabindex="0" aria-controls="example1" type="button" aria-haspopup="true"
-                                    aria-expanded="false"><span>Column visibility</span></button></div>
+<div id="loading-overlay" class="loading-overlay" style="display: none;">
+    <div id="loading" class="loading">
+        <img src="{{ asset('loading.gif') }}" alt="Loading..." />
+    </div>
+</div>
+<div class="card">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold ">Data surat masuk</h6>
+        <button type="button" class="btn btn-outline-primary ml-auto" data-toggle="modal" data-target="#DivisiModal"
+            id="#myBtn">
+            Tambah Data
+        </button>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="dataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Asal Surat</th>
+                    <th>No Surat</th>
+                    <th>Perihal</th>
+                    <th>Jenis Surat</th>
+                    <th>Tanggal Surat Masuk</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+
+    {{-- modal create --}}
+    <div class="modal fade" id="DivisiModal" tabindex="-1" role="dialog" aria-labelledby="DivisiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DivisiModalLabel">Tambah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formTambah" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="uuid">
+                        <div class="form-group">
+                            <label for="asal_surat">asal surat</label>
+                            <input type="text" class="form-control" name="asal_surat" id="asal_surat" placeholder="Input Here..">
                         </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                    class="form-control form-control-sm" placeholder=""
-                                    aria-controls="example1"></label></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid"
-                            aria-describedby="example1_info">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1"
-                                        colspan="1" aria-sort="ascending"
-                                        aria-label="No: activate to sort column descending">No</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Nama User: activate to sort column ascending">Nama User</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="No. Surat: activate to sort column ascending">No. Surat</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Tanggal Masuk Surat: activate to sort column ascending">Tanggal Masuk Surat
-                                    </th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Perihal: activate to sort column ascending">Perihal</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="File Surat Masuk: activate to sort column ascending">File Surat Masuk</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Asal Surat: activate to sort column ascending">Asal Surat</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                        aria-label="Action: activate to sort column ascending">Action
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 1.0</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.7</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 1.5</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 2.0</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="dtr-control sorting_1" tabindex="0">Gecko</td>
-                                    <td>Firefox 3.0</td>
-                                    <td>Win 2k+ / OSX.3+</td>
-                                    <td>1.9</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Camino 1.0</td>
-                                    <td>OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Camino 1.5</td>
-                                    <td>OSX.3+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Netscape 7.2</td>
-                                    <td>Win 95+ / Mac OS 8.6-9.2</td>
-                                    <td>1.7</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Netscape Browser 8</td>
-                                    <td>Win 98SE+</td>
-                                    <td>1.7</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Netscape Navigator 9</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td>1.8</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                                <tr class="even">
-                                    <td class="sorting_1 dtr-control" tabindex="0">Gecko</td>
-                                    <td>Mozilla 1.0</td>
-                                    <td>Win 95+ / OSX.1+</td>
-                                    <td>1</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                    <td>A</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th rowspan="1" colspan="1">Rendering engine</th>
-                                    <th rowspan="1" colspan="1">Browser</th>
-                                    <th rowspan="1" colspan="1">Platform(s)</th>
-                                    <th rowspan="1" colspan="1">Engine version</th>
-                                    <th rowspan="1" colspan="1">CSS grade</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-5">
-                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10
-                            of 57 entries</div>
-                    </div>
-                    <div class="col-sm-12 col-md-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                            <ul class="pagination">
-                                <li class="paginate_button page-item previous disabled" id="example1_previous"><a
-                                        href="#" aria-controls="example1" data-dt-idx="0" tabindex="0"
-                                        class="page-link">Previous</a></li>
-                                <li class="paginate_button page-item active"><a href="#" aria-controls="example1"
-                                        data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                <li class="paginate_button page-item "><a href="#" aria-controls="example1"
-                                        data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                                <li class="paginate_button page-item next" id="example1_next"><a href="#"
-                                        aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                                </li>
-                            </ul>
+                        <div class="form-group">
+                            <label for="no_surat">no surat</label>
+                            <input type="text" class="form-control" name="no_surat" id="no_surat" placeholder="Input Here..">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="perihal">perihal</label>
+                            <input type="text" class="form-control" name="perihal" id="perihal" placeholder="Input Here..">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_surat">tanggal surat</label>
+                            <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat" placeholder="Input Here..">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_jenis_surat">jenis surat</label>
+                            <select name="id_jenis_surat" id="id_jenis_surat" class="form-control">
+                                <option value="" disabled selected>-- select --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="file_surat_masuk">file surat masuk</label>
+                            <input type="file" class="form-control" name="file_surat_masuk" id="file_surat_masuk" placeholder="Input Here..">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_user">id_user</label>
+                            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Input Here..">
+                        </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                </div>
+                </form>
             </div>
         </div>
-        <!-- /.card-body -->
     </div>
-    <!-- /.card -->
 </div>
+
+{{-- MODAL EDIT --}}
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EditModalLabel">Edit Surat Masuk</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formEdit" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="uuid" id="uuid">
+                    <div class="form-group">
+                        <label for="asal_surat">asal surat</label>
+                        <input type="text" class="form-control" name="asal_surat" id="edit_asal_surat" placeholder="Input Here..">
+                    </div>
+                    <div class="form-group">
+                        <label for="no_surat">no surat</label>
+                        <input type="text" class="form-control" name="no_surat" id="edit_no_surat" placeholder="Input Here..">
+                    </div>
+                    <div class="form-group">
+                        <label for="perihal">perihal</label>
+                        <input type="text" class="form-control" name="perihal" id="edit_perihal" placeholder="Input Here..">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_surat">tanggal surat</label>
+                        <input type="date" class="form-control" name="tanggal_surat" id="edit_tanggal_surat" placeholder="Input Here..">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_jenis_surat">jenis surat</label>
+                        <select name="id_jenis_surat" id="edit_id_jenis_surat" class="form-control">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">file surat masuk</label>
+                        <input type="file" class="form-control" name="file_surat_masuk" id="edit_file_surat_masuk" placeholder="Input Here..">
+                        <label for="edit_file_surat_masuk" id="edit_file_surat_masuk-label"></label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="file_surat_masuk">preview</label>
+                        <img src="" alt="" id="preview" class="w-100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_user">id_user</label>
+                        <input type="text" class="form-control" name="id_user" id="edit_id_user" placeholder="Input Here..">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                <button type="submit" form="formEdit" class="btn btn-outline-primary">Update Data</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+const apiUrl = "api/v2/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk";
+const apiJenisSurat = "api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat"
+
+$(document).ready(function() {
+    // handle cetak data
+    var dataTable = $("#dataTable").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["csv", "excel"]
+    }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
+    $.ajax({
+        url: `{{ url('${apiUrl}') }}`,
+        method: "GET",
+        dataType: "json",
+        success: function(response) {
+            let tableBody = "";
+            $.each(response.data, function(index, item) {
+                tableBody += /*html*/
+                    `<tr>
+                        <td>${(index + 1)}</td> 
+                        <td>${item.asal_surat}</td>
+                        <td>${item.no_surat}</td>
+                        <td>${item.perihal}</td>
+                        <td>${item.jenis_surat.jenis_surat}</td>
+                        <td>${item.tanggal_surat}</td>
+                    
+                        <td>
+                            <button class='btn btn-success download-link' data-filename="${item.file_surat_masuk}">
+                                <i class="fa-solid fa-download"></i>
+                            </button>
+                            <button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' data-uuid='${item.uuid}'> 
+                                <i class='fa fa-edit'></i>
+                            </button> 
+                            <button type='button' class='btn btn-danger delete-confirm' data-uuid='${item.uuid} '>
+                                <i class='fa fa-trash'></i>
+                            </button> 
+                        </td>
+                    </tr>`
+            });
+            var table = $("#dataTable").DataTable();
+            table.clear().draw();
+            table.rows.add($(tableBody)).draw();
+
+            $(document).ready(function() {
+                $('.download-link').click(function(event) {
+                    event.preventDefault();
+
+                    var filename = $(this).data('filename');
+                    var downloadUrl = `{{ asset('uploads/suratMasuk/${filename}')}}`
+
+                    var link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = filename;
+                    link.click();
+                    link.remove();
+                });
+            });
+
+        },
+        error: function() {
+            console.log("Failed to get data from server");
+        }
+    });
+});
+
+// get jenis surat
+$(document).ready(function() {
+    $.ajax({
+        url: `{{ url('${apiJenisSurat}') }}`,
+        method: "GET",
+        dataType: "json",
+        success: function(response) {
+            populateSelectOptions(response.data)
+            populateSelectOptionsEditt(response.data)
+        },
+        error: function() {
+            console.log("Failed to get data from server");
+        }
+    });
+
+    // for create
+    function populateSelectOptions(data) {
+        var select = $("#id_jenis_surat");
+        for (var i = 0; i < data.length; i++) {
+            var option = $("<option>")
+            .val(data[i].id)
+            .text(data[i].jenis_surat);
+
+            select.append(option);
+        }
+    }
+
+    // for update
+    function populateSelectOptionsEditt(data) {
+        var select = $("#edit_id_jenis_surat");
+        select.empty();
+        for (var i = 0; i < data.length; i++) {
+            var option = $("<option>")
+            .val(data[i].id)
+            .text(data[i].jenis_surat);
+
+            select.append(option);
+        }
+    }
+});
+
+
+//tambah data
+$(document).ready(function() {
+    var formTambah = $('#formTambah');
+    formTambah.on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $('#loading-overlay').show();
+        $.ajax({
+            type: 'POST',
+            url: `{{ url('${apiUrl}/create') }}`,
+            data: formData,
+            dataType: 'JSON',
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $('#loading-overlay').hide();
+                if (data.message === 'check your validation') {
+                    var error = data.errors;
+                    var errorMessage = "";
+
+                    $.each(error, function(key, value) {
+                        errorMessage += value[0] + "<br>";
+                    });
+
+                    Swal.fire({
+                        title: 'Error',
+                        html: errorMessage,
+                        icon: 'error',
+                        timer: 5000,
+                        showConfirmButton: true
+                    });
+                } else {
+                    $('#loading-overlay').hide();
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Data Success Create',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }
+            },
+            error: function(data) {
+                $('#loading-overlay').hide();
+
+                var error = data.responseJSON.errors;
+                var errorMessage = "";
+
+                $.each(error, function(key, value) {
+                    errorMessage += value[0] + "<br>";
+                });
+
+                Swal.fire({
+                    title: 'Error',
+                    html: errorMessage,
+                    icon: 'error',
+                    timer: 5000,
+                    showConfirmButton: true
+                });
+            }
+        });
+    });
+});
+
+//edit
+$(document).on('click', '.edit-modal', function() {
+    let uuid = $(this).data('uuid');
+    $.ajax({
+        url: `{{ url('${apiUrl}/get/${uuid}') }}`,
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(response) {
+            $('#uuid').val(response.data.uuid);
+            $('#edit_asal_surat').val(response.data.asal_surat)
+            $('#edit_no_surat').val(response.data.no_surat)
+            $('#edit_perihal').val(response.data.perihal)
+            $('#edit_tanggal_surat').val(response.data.tanggal_surat)
+            $('#edit_id_jenis_surat').val(response.data.id_jenis_surat)
+            
+            $('#edit_file_surat_masuk').html(response.data.file_surat_masuk)
+            var filename = response.data.file_surat_masuk.split('/')
+            $('#edit_file_surat_masuk-label').text(filename)
+
+            $('#preview').attr('src', `{{ asset('uploads/suratMasuk/${response.data.file_surat_masuk}')}}`)
+            $('#edit_id_user').val(response.data.id_user)
+
+            $('#EditModal').modal('show');
+        },
+        error: function() {
+            alert("error");
+        }
+    });
+});
+
+//update
+$(document).ready(function() {
+    var formEdit = $('#formEdit');
+    formEdit.on('submit', function(e) {
+        e.preventDefault();
+        var uuid = $('#uuid').val();
+        var formData = new FormData(this);
+        $('#loading-overlay').show();
+        $.ajax({
+            type: "POST",
+            url: `{{ url('${apiUrl}/update/') }}/${uuid}`,
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                $('#loading-overlay').hide();
+                if (data.message === 'check your validation') {
+                    var error = data.errors;
+                    var errorMessage = "";
+                    $.each(error, function(key, value) {
+                        errorMessage += value[0] + "<br>";
+                    });
+                    Swal.fire({
+                        title: 'Error',
+                        html: errorMessage,
+                        icon: 'error',
+                        timer: 5000,
+                        showConfirmButton: true
+                    });
+                } else {
+                    $('#loading-overlay').hide();
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Data Success Update',
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        location.reload();
+                    });
+                }
+            },
+            error: function(data) {
+                $('#loading-overlay').hide();
+                var errors = data.responseJSON.errors;
+                var errorMessage = "";
+
+                $.each(errors, function(key, value) {
+                    errorMessage += value + "<br>";
+                });
+
+                Swal.fire({
+                    title: "Error",
+                    html: errorMessage,
+                    icon: "error",
+                    timer: 5000,
+                    showConfirmButton: true
+                });
+            }
+        });
+    });
+});
+
+//delete
+$(document).on('click', '.delete-confirm', function(e) {
+    e.preventDefault();
+    var uuid = $(this).data('uuid');
+    Swal.fire({
+        title: 'Anda yakin ingin menghapus data ini?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Delete',
+        cancelButtonText: 'Cancel',
+        resolveButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: `{{ url('${apiUrl}/delete/${uuid}') }}`,
+                type: 'DELETE',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "uuid": uuid
+                },
+                success: function(response) {
+                    if (response.code === 200) {
+                        Swal.fire({
+                            title: 'Data berhasil dihapus',
+                            icon: 'success',
+                            timer: 5000,
+                            showConfirmButton: true
+                        }).then((result) => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Gagal menghapus data',
+                            text: response.message,
+                            icon: 'error',
+                            timer: 5000,
+                            showConfirmButton: true
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Terjadi kesalahan',
+                        text: 'Gagal menghapus data',
+                        icon: 'error',
+                        timer: 5000,
+                        showConfirmButton: true
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+</script>
 @endsection
