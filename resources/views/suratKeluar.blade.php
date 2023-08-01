@@ -237,7 +237,7 @@
                                 <td>${data.tanggal_surat}</td>
                                 <td>${data.perihal}</td>
                                 <td>
-                                    <button id="" data-uuid="${data.uuid}" class="btn btn-info"><i class="fas fa-download"></i></button>
+                                    <button class="btn btn-info download" data-filename="${data.file_surat_keluar}"><i class="fas fa-download"></i></button>
                                     <button id="edit-modal" data-uuid="${data.uuid}" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
                                     <button id="delete-confirm" data-uuid="${data.uuid}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                                 </td>
@@ -264,7 +264,22 @@
             $("#loading-row").hide();
         }
     });
+
+    // fungsi download
+    $(document).on('click', '.download', function (event) {
+        event.preventDefault();
+
+        var filename = $(this).data('filename');
+        var downloadUrl = `{{ asset('uploads/suratKeluar/') }}/${filename}`;
+
+        var link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = filename;
+        link.click();
+        link.remove();
+    });
 });
+
 
 
     // get jenis surat
