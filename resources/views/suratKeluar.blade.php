@@ -1,10 +1,10 @@
 @extends('layouts/base')
 @section('content')
-<div class="row mb-2">
-    <div class="col-sm-6">
-        <h1 class="m-0">Surat Keluar</h1>
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Surat Keluar</h1>
+        </div>
     </div>
-</div>
 @endsection
 @section('main-content')
 <div class="col-12">
@@ -28,13 +28,13 @@
                                     <th>Tujuan Surat</th>
                                     <th>No. Surat</th>
                                     <th>Jenis Surat</th>
-                                    <th>Tanggal Surat Keluar</th>
+                                    <th>Tanggal Keluar</th>
                                     <th>Perihal</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                                <!-- Display a loading spinner while fetching data -->
+                                
                                 <tr id="loading-row" style="display: none;">
                                     <td colspan="9" class="text-center">
                                         <i class="fa fa-spinner fa-spin"></i> Loading...
@@ -87,21 +87,23 @@
                         <input id="tanggal_surat" name="tanggal_surat" type="date" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="perihal">Perihal:</label>
-                        <input type="text" class="form-control" name="perihal" id="perihal" placeholder="Perihal">
-                    </div>
-                    <div class="form-group">
                         <label for="file_surat_keluar">Input File Surat</label>
                         <div class="input-group">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="file_surat_keluar"
                                     id="file_surat_keluar">
-                                <label class="custom-file-label" for="file_surat_keluar">Pilih file</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
+                                <label class="custom-file-label" id="nama-surat-keluar" for="file_surat_keluar">Pilih
+                                    file</label>
                             </div>
                         </div>
+                        <span>format : Jpg,png,pdf,doc </span>
+                        <img src="" id="preview-add" class="mx-auto d-block pb-2"
+                            style="max-width: 300px; haight: 100px; padding-top: 23px;">
+                    </div>
+                    <div class="form-group">
+                        <label for="perihal">Perihal:</label>
+                        <textarea type="text" class="form-control" name="perihal" id="perihal"
+                            placeholder="Perihal"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="id_user">Id User</label>
@@ -155,18 +157,24 @@
                             placeholder="Input Here..">
                     </div>
                     <div class="form-group">
-                        <label for="file_surat_keluar">Input File Surat:</label>
-                        <input type="file" class="form-control" name="file_surat_keluar" id="edit_file_surat_keluar"
-                            placeholder="Input Here..">
+                        <label for="file_surat_keluar">Input File Surat</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="file_surat_keluar"
+                                    id="edit_file_surat_keluar">
+                                <label class="custom-file-label" id="edit_file_surat-label"
+                                    for="file_surat_keluar">Pilih file</label>
+                            </div>
+                        </div>
+                        <span>format : Jpg,png,pdf,doc </span>
+                        <img src="" id="preview-edit" class="mx-auto d-block pb-2"
+                            style="max-width: 300px; haight: 100px; padding-top: 23px;">
                     </div>
                     <div class="form-group">
                         <label for="perihal">Perihal:</label>
-                        <input type="text" class="form-control" name="perihal" id="edit_perihal"
-                            placeholder="Input Here..">
+                        <textarea type="text" class="form-control" name="perihal" id="edit_perihal"
+                            placeholder="Input Here.." rows="3" style="height: 100px;"></textarea>
                     </div>
-                    
-                    
-                    
                     <div class="form-group">
                         <label for="id_user">Id_User</label>
                         <input type="text" class="form-control" name="id_user" id="edit_id_user"
@@ -176,7 +184,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                <button type="submit" form="formEdit" class="btn btn-outline-primary btn-update btn-update">Update Data</button>
+                <button type="submit" form="formEdit" class="btn btn-outline-primary btn-update btn-update">Update
+                    Data</button>
             </div>
 
         </div>
@@ -185,71 +194,77 @@
 
 <script>
     const Url = 'api/v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
-    const UrlJenisSurat = 'api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat'
+    const UrlJenisSurat = 'api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat';
 
-    showTabel();
+    // render data api
+    $(document).ready(function () {
+    $("#loading-row").show();
 
+    $.ajax({
+        type: 'GET',
+        dataType: "json",
+        url: `{{ url('${Url}') }}`,
+        success: function (res) {
+            $("#loading-row").hide();
 
-    function table(res) {
-        let tableBody = '';
+            if (res.code === 404) {
+                // Handle the case when data is not found
+                $("#tbody").html(`
+                    <tr>
+                        <td colspan="7" class="text-center">No data.</td>
+                    </tr>
+                `);
+            } else if (res.code === 200) {
+                // Handle the case when data is available
+                if (!res.data || res.data.length === 0) {
+                    $("#tbody").html(`
+                        <tr>
+                            <td colspan="7" class="text-center">No data.</td>
+                        </tr>
+                    `);
+                } else {
+                    // Clear existing content before appending new rows
+                    $("#tbody").empty();
 
-        if (res.code === 404) {
-            // Handle the case when data is not found
-            tableBody += `
-        <tr>
-            <td colspan="9" class="text-center">No data.</td>
-        </tr>`;
-        } else if (res.code === 200) {
-            // Handle the case when data is available
-            if (!res.data || res.data.length <= 0) {
-                tableBody += `
-            <tr>
-                <td colspan="9" class="text-center">No data.</td>
-            </tr>`;
-            } else {
-                for (let i = 0; i < res.data.length; i++) {
-                    tableBody += `
-                <tr>
-                    <td>` + (i + 1) + `</td>
-                    <td>` + res.data[i].asal_surat + `</td>
-                    <td>` + res.data[i].no_surat + `</td>
-                    <td>` + res.data[i].jenis_surat.jenis_surat + `</td>
-                    <td>` + res.data[i].tanggal_surat + `</td>
-                    <td>` + res.data[i].perihal + `</td>
-                    <td>
-                        <button id="edit-modal" data-uuid="` + res.data[i].uuid + `" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
-                        <button id="delete-confirm" data-uuid="` + res.data[i].uuid + `" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                    </td>
-                </tr>`;
+                    // Append each row to the table
+                    res.data.forEach((data, index) => {
+                        const newRow = `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${data.asal_surat}</td>
+                                <td>${data.no_surat}</td>
+                                <td>${data.jenis_surat.jenis_surat}</td>
+                                <td>${data.tanggal_surat}</td>
+                                <td>${data.perihal}</td>
+                                <td>
+                                    <button id="edit-modal" data-uuid="${data.uuid}" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
+                                    <button id="delete-confirm" data-uuid="${data.uuid}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        `;
+                        $("#tbody").append(newRow);
+                    });
                 }
+            } else {
+                // Handle other cases or errors
+                console.log('Error:', res.message);
             }
-        } else {
-            // Handle other cases or errors
-            console.log('Error:', res.message);
+
+            // data table
+            $("#dataTable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["csv", "excel"]
+            }).buttons().container().appendTo('.dataTables_wrapper .col-md-6:eq(0)');
+        },
+        error: function (error) {
+            console.log(error);
+            $("#loading-row").hide();
         }
+    });
+});
 
-        $('#tbody').html(tableBody);
-
-    }
-
-    // get data api
-    function showTabel() {
-        $("#loading-row").show();
-
-        $.ajax({
-            type: 'GET',
-            dataType: "json",
-            url: `{{ url('${Url}') }}`,
-            success: function (res) {
-                table(res);
-                $("#loading-row").hide();
-            },
-            error: function (error) {
-                console.log(error);
-                $("#loading-row").hide();
-            }
-        })
-    };
 
     // get jenis surat
     $(document).ready(function () {
@@ -294,24 +309,43 @@
         }
     });
 
-    // datatabel
-    $(document).ready(function () {
-        $("#dataTable").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["csv", "excel"]
-        }).buttons().container().appendTo('.dataTables_wrapper .col-md-6:eq(0)');
-    });
-
-    $(document).on('click', '#btn-add', function () {
-        $('#formTambah').trigger("reset");
-    });
-    
-
     //tambah data
     $(document).ready(function () {
         var formTambah = $('#formTambah');
+            // reset button tambah data
+            $("#btn-add").on("click", function() {
+            // Clear the value of the file input
+            $("#file_surat_keluar").val("");
+            // Reset the custom file label
+            $("#nama-surat-keluar").text("Pilih file");
+            // Clear the image preview (optional)
+            $("#preview-add").attr("src", "");
+        });
+
+        // menampilkan nama file yang diisi di form tambah data
+        $('#file_surat_keluar').on('change', function () {
+            var fileName = $(this).val().split('\\').pop();
+            $('#nama-surat-keluar').text(fileName);
+
+            // menampilkan gambar
+            if (this.files && this.files[0]) {
+                const fileAdd = this.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Display the image preview
+                    $("#preview-add").attr("src", e.target.result);
+                    $("#preview-add").css("display", "block"); // Show the image
+                };
+
+                reader.readAsDataURL(fileAdd);
+            } else {
+                // If no file is selected, clear the image preview and hide it
+                $("#preview-add").attr("src", "");
+                $("#preview-add").css("display", "none"); // Hide the image
+            }
+        });
+
         formTambah.on('submit', function (e) {
             e.preventDefault();
             var formData = new FormData(this);
@@ -324,10 +358,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                $('.btn-send').addClass("disabled").html("Processing...").attr('disabled', true);
+                    $('.btn-send').addClass("disabled").html("Processing...").attr(
+                        'disabled', true);
                 },
                 complete: function () {
-                    $('.btn-send').removeClass("disabled").html("Submit").attr('disabled', false);
+                    $('.btn-send').removeClass("disabled").html("Submit").attr('disabled',
+                        false);
                 },
                 success: function (data) {
                     $('#loading-overlay').hide();
@@ -380,11 +416,30 @@
     //edit
     $(document).on('click', '#edit-modal', function () {
         let uuid = $(this).data('uuid');
+        // menampilkan nama file yang baru diisi di form edit data
+        $('#edit_file_surat_keluar').on('change', function () {
+            var fileName = $(this).val().split('\\').pop();
+            $('#edit_file_surat-label').text(fileName);
+
+            // menampilkan gambar
+            if (this.files && this.files[0]) {
+                const fileEdit = this.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Display the image preview
+                    $("#preview-edit").attr("src", e.target.result);
+                };
+
+                reader.readAsDataURL(fileEdit);
+            }
+        });
         $.ajax({
             url: `{{ url('${Url}/get/${uuid}') }}`,
             type: 'GET',
             dataType: 'JSON',
             success: function (data) {
+                console.log('get data =>', data);
                 $('#uuid').val(data.data.uuid);
                 $('#edit_asal_surat').val(data.data.asal_surat)
                 $('#edit_no_surat').val(data.data.no_surat)
@@ -392,11 +447,18 @@
                 $('#edit_tanggal_surat').val(data.data.tanggal_surat)
                 $('#edit_id_jenis_surat').val(data.data.id_jenis_surat)
                 $('#edit_id_user').val(data.data.id_user)
-                $('#edit_file_surat_keluar').val(data.data.file_surat_keluar)
+
+                $('#preview-edit').attr('src', "{{ asset('uploads/SuratKeluar/') }}/" + data.data
+                    .file_surat_keluar);
+
+                // menampilkan nama file edit yang sudah tersimpan
+                var fileName = data.data.file_surat_keluar.split('\\').pop();
+                $('#edit_file_surat-label').text(fileName);
+
                 $('#EditModal').modal('show');
             },
             error: function () {
-                alert("error");
+                alert("Error fetching data.");
             }
         });
     });
@@ -417,10 +479,12 @@
                 contentType: false,
                 processData: false,
                 beforeSend: function () {
-                $('.btn-update').addClass("disabled").html("Processing...").attr('disabled', true);
+                    $('.btn-update').addClass("disabled").html("Processing...").attr(
+                        'disabled', true);
                 },
                 complete: function () {
-                    $('.btn-update').removeClass("disabled").html("Update Data").attr('disabled', false);
+                    $('.btn-update').removeClass("disabled").html("Update Data").attr(
+                        'disabled', false);
                 },
                 success: function (data) {
                     $('#loading-overlay').hide();
@@ -499,8 +563,7 @@
                                 timer: 5000,
                                 showConfirmButton: true
                             }).then((result) => {
-                                // location.reload();
-                                showTabel();
+                                location.reload();
                             });
                         } else {
                             Swal.fire({
