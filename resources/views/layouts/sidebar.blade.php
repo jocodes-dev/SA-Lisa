@@ -49,7 +49,7 @@
         </li>
       
         <li class="nav-item">
-          <a href="arsip" id="addUser" class="nav-link">
+          <a href="add-user" id="addUser" class="nav-link">
             <i class="nav-icon fa-solid fa-user-plus"></i>
             <p>Add User</p>
           </a>
