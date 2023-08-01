@@ -128,7 +128,7 @@ class SuratMasukController extends Controller
                 'tanggal_surat' => 'required|date',
                 'perihal' => 'required',
                 'asal_surat' => 'required',
-                'file_surat_masuk' => 'required|mimes:png,jpg,pdf,docx,doc|max:2048',
+                'file_surat_masuk' => 'mimes:png,jpg,pdf,docx,doc|max:2048',
 
             ],
             [

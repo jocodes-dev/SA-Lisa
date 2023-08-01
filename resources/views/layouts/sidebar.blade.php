@@ -48,7 +48,12 @@
           </a>
         </li>
       
-        
+        <li class="nav-item">
+          <a href="arsip" id="addUser" class="nav-link">
+            <i class="nav-icon fa-solid fa-user-plus"></i>
+            <p>Add User</p>
+          </a>
+        </li>
         
       </ul>
     </nav>
@@ -74,6 +79,8 @@
       getId('jenisSurat').classList.add('active')
     } else if (routePath === '/arsip') {
       getId('arsip').classList.add('active')
+    } else if (routePath === '/add-user') {
+      getId('addUser').classList.add('active')
     }
   }
   checkActiveMenu()
