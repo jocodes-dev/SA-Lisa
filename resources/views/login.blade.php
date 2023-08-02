@@ -22,10 +22,12 @@
       <a href="../../index2.html" class="h1"><b>Kel. lurah</b></a>
     </div>
     <div class="card-body">
+      @include('sweetalert::alert')
 
-      <form action="../../index3.html" method="post">
+      <form id="loginForm" method="post">
+        @csrf
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -33,7 +35,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -65,3 +67,64 @@
 <script src="{{ asset('assets/dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>
+
+<script src="{{ asset('assets/sweetalert/script.js')}}"></script>
+
+<script>
+const apiUrl = '56cfb271-4e29-47cc-a237-8ae819491903/user/login'
+
+$(document).ready(function() {
+  var formTambah = $('#loginForm');
+  formTambah.on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    $('#loading-overlay').show();
+    $.ajax({
+      type: 'POST',
+      url: `{{ url('${apiUrl}') }}`,
+      data: formData,
+      dataType: 'JSON',
+      contentType: false,
+      processData: false,
+      success: function(data) {
+        localStorage.setItem('token', data.access_token);
+        Swal.fire({
+          title: 'Success',
+          text: 'Berhasil Login',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK'
+        }).then(function() {
+          window.location.href = '/';
+        });
+      },
+      error: function(data) {
+        Swal.fire({
+          title: 'Error',
+          html: 'Email atau password salah',
+          icon: 'error',
+          timer: 5000,
+          showConfirmButton: true
+        });
+        }
+      });
+  });
+});
+
+const apiCheck = "v2/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk";
+
+$(document).ready(function() {
+  $.ajax({
+    url: `{{ url('${apiCheck}') }}`,
+    method: "GET",
+    dataType: "json",
+    success: function(response) {
+      window.location.href = '/';
+      console.log(response, '<-- success to login');
+    },
+    error: function() {
+
+    }
+  });
+});
+</script>
