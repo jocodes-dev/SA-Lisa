@@ -47,7 +47,7 @@ Route::get('/login', function () {
 });
 
 // route login
-Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/login',[UserController::class,'login']);
+Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/login', [UserController::class, 'login']);
 
 Route::middleware(['web', 'auth'])->group(function () {
     // route jenis surat
@@ -78,12 +78,13 @@ Route::middleware(['web', 'auth'])->group(function () {
     });
 
     // route create data user dan log out
-    Route::prefix('v4')->controller(UserController::class)->group(function () {
-        Route::get('/56cfb271-4e29-47cc-a237-8ae819491903/user', 'getAllData');
-        Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/create', 'createData');
-        Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/logout', 'logout');
-    });
+
 });
-
-
-
+Route::prefix('v4')->controller(UserController::class)->group(function () {
+    Route::get('/56cfb271-4e29-47cc-a237-8ae819491903/user', 'getAllData');
+    Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/create', 'createData');
+    Route::get('/56cfb271-4e29-47cc-a237-8ae819491903/user/get/{uuid}', 'getDataByUuid');
+    Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/update/{uuid}', 'updateDataByUuid');
+    Route::delete('/56cfb271-4e29-47cc-a237-8ae819491903/user/delete/{uuid}', 'deleteData');
+    Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/logout', 'logout');
+});

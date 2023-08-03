@@ -67,8 +67,8 @@
                         @csrf
                         <input type="hidden" name="uuid">
                         <div class="form-group">
-                            <label for="asal_surat">Tujuan Surat:</label>
-                            <input type="text" class="form-control" id="asal_surat" name="asal_surat"
+                            <label for="tujuan_surat">Tujuan Surat:</label>
+                            <input type="text" class="form-control" id="tujuan_surat" name="tujuan_surat"
                                 placeholder="Tujuan Surat">
                         </div>
                         <div class="form-group">
@@ -136,8 +136,8 @@
                         @csrf
                         <input type="hidden" name="uuid" id="uuid">
                         <div class="form-group">
-                            <label for="asal_surat">Tujuan Surat:</label>
-                            <input type="text" class="form-control" name="asal_surat" id="edit_asal_surat"
+                            <label for="tujuan_surat">Tujuan Surat:</label>
+                            <input type="text" class="form-control" name="tujuan_surat" id="edit_tujuan_surat"
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
@@ -193,8 +193,8 @@
     </div>
 
 <script>
-    const Url = 'api/v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
-    const UrlJenisSurat = 'api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat';
+    const Url = 'v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
+    const UrlJenisSurat = 'v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat';
 
     // render data api
     $(document).ready(function () {
@@ -231,7 +231,7 @@
                         const newRow = `
                             <tr>
                                 <td>${index + 1}</td>
-                                <td>${data.asal_surat}</td>
+                                <td>${data.tujuan_surat}</td>
                                 <td>${data.no_surat}</td>
                                 <td>${data.jenis_surat.jenis_surat}</td>
                                 <td>${data.tanggal_surat}</td>
@@ -457,7 +457,7 @@
             success: function (data) {
                 console.log('get data =>', data);
                 $('#uuid').val(data.data.uuid);
-                $('#edit_asal_surat').val(data.data.asal_surat)
+                $('#edit_tujuan_surat').val(data.data.tujuan_surat)
                 $('#edit_no_surat').val(data.data.no_surat)
                 $('#edit_perihal').val(data.data.perihal)
                 $('#edit_tanggal_surat').val(data.data.tanggal_surat)
