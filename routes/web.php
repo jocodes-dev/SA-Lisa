@@ -21,33 +21,7 @@ Route::get('count',[DashboardController::class,'countData']);
 
 
 
-Route::get('/', function () {
-    return view('dashboard');
-});
 
-Route::get('/jenis-surat', function () {
-    return view('jenisSurat');
-});
-
-Route::get('/surat-masuk', function () {
-    return view('suratMasuk');
-});
-
-Route::get('/surat-keluar', function () {
-    return view('suratKeluar');
-});
-
-Route::get('/arsip-surat-masuk', function () {
-    return view('arsipSuratMasuk');
-});
-
-Route::get('/arsip-surat-masuk/{id_jenis_surat}', function () {
-    return view('arsipSuratMasukByName');
-});
-
-Route::get('/add-user', function () {
-    return view('addUser');
-});
 
 Route::get('/login', function () {
     return view('login');
@@ -57,6 +31,34 @@ Route::get('/login', function () {
 Route::post('/56cfb271-4e29-47cc-a237-8ae819491903/user/login', [UserController::class, 'login']);
 
 Route::middleware(['web', 'auth'])->group(function () {
+
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+    
+    Route::get('/jenis-surat', function () {
+        return view('jenisSurat');
+    })->middleware('role:admin');;
+    
+    Route::get('/surat-masuk', function () {
+        return view('suratMasuk');
+    });
+    
+    Route::get('/surat-keluar', function () {
+        return view('suratKeluar');
+    });
+    
+    Route::get('/arsip-surat-masuk', function () {
+        return view('arsipSuratMasuk');
+    });
+    
+    Route::get('/arsip-surat-masuk/{id_jenis_surat}', function () {
+        return view('arsipSuratMasukByName');
+    });
+    
+    Route::get('/add-user', function () {
+        return view('addUser');
+    })->middleware('role:admin');
     // route jenis surat
     Route::prefix('v1')->controller(JenisSuratController::class)->group(function () {
         Route::get('/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat', 'getAllData');
