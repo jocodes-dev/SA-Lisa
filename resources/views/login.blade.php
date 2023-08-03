@@ -19,7 +19,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Kel. lurah</b></a>
+      <a href="../../index2.html" class="h1"><b>Kel. Besusu Timur</b></a>
     </div>
     <div class="card-body">
       @include('sweetalert::alert')
