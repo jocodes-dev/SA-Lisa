@@ -89,9 +89,9 @@
       activeClass('suratKeluar')
     } else if (routePath === '/jenis-surat') {
       activeClass('jenisSurat')
-    } else if (routePath === '/arsip-surat-masuk' || routePath === '/arsip-surat-masuk/name') {
+    } else if (routePath.startsWith('/arsip-surat-masuk')) {
       activeClass('arsipSuratMasuk')
-    } else if (routePath === '/arsip-surat-keluar' || routePath === '/arsip-surat-keluar/name') {
+    } else if (routePath.startsWith('/arsip-surat-keluar')) {
       activeClass('arsipSuratKeluar')
     } else if (routePath === '/add-user') {
       activeClass('addUser')
