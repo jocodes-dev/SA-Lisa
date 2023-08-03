@@ -31,6 +31,7 @@
                     <th>Perihal</th>
                     <th>Jenis Surat</th>
                     <th>Tanggal Surat Masuk</th>
+                    <th>Nama Pembuat</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -127,7 +128,7 @@
                     <div class="form-group">
                         <label for="id_jenis_surat">jenis surat</label>
                         <select name="id_jenis_surat" id="edit_id_jenis_surat" class="form-control">
-                            
+
                         </select>
                     </div>
                     <div class="form-group">
@@ -135,7 +136,7 @@
                         <input type="file" class="form-control" name="file_surat_masuk" id="edit_file_surat_masuk" placeholder="Input Here..">
                         <label for="edit_file_surat_masuk" id="edit_file_surat_masuk-label"></label>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="file_surat_masuk">preview</label>
                         <img src="" alt="" id="preview" class="w-100">
@@ -172,23 +173,24 @@ $(document).ready(function() {
             $.each(response.data, function(index, item) {
                 tableBody += /*html*/
                     `<tr>
-                        <td>${(index + 1)}</td> 
+                        <td>${(index + 1)}</td>
                         <td>${item.asal_surat}</td>
                         <td>${item.no_surat}</td>
                         <td>${item.perihal}</td>
                         <td>${item.jenis_surat.jenis_surat}</td>
                         <td>${item.tanggal_surat}</td>
-                    
+                        <td>${item.users.name}</td>
+
                         <td>
                             <button class='btn btn-success download-link' data-filename="${item.file_surat_masuk}">
                                 <i class="fa-solid fa-download"></i>
                             </button>
-                            <button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' data-uuid='${item.uuid}'> 
+                            <button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' data-uuid='${item.uuid}'>
                                 <i class='fa fa-edit'></i>
-                            </button> 
+                            </button>
                             <button type='button' class='btn btn-danger delete-confirm' data-uuid='${item.uuid} '>
                                 <i class='fa fa-trash'></i>
-                            </button> 
+                            </button>
                         </td>
                     </tr>`
             });
@@ -340,7 +342,7 @@ $(document).on('click', '.edit-modal', function() {
             $('#edit_perihal').val(response.data.perihal)
             $('#edit_tanggal_surat').val(response.data.tanggal_surat)
             $('#edit_id_jenis_surat').val(response.data.id_jenis_surat)
-            
+
             $('#edit_file_surat_masuk').html(response.data.file_surat_masuk)
             var filename = response.data.file_surat_masuk.split('/')
             $('#edit_file_surat_masuk-label').text(filename)
