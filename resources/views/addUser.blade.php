@@ -188,12 +188,7 @@
           }
 
           // data table
-          $("#dataTable").DataTable({
-              "responsive": true,
-              "lengthChange": false,
-              "autoWidth": false,
-              "buttons": ["csv", "excel"]
-          }).buttons().container().appendTo('.dataTables_wrapper .col-md-6:eq(0)');
+          $("#dataTable").DataTable();
       },
       error: function (error) {
           console.log(error);
@@ -282,7 +277,6 @@
           type: 'GET',
           dataType: 'JSON',
           success: function (data) {
-              console.log('get data =>', data);
               $('#uuid').val(data.data.uuid);
               $('#edit_name').val(data.data.name);
               $('#edit_email').val(data.data.email);
