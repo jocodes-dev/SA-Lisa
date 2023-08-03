@@ -93,13 +93,6 @@
     </div>
     <script>
         $(document).ready(function() {
-            // handle cetak data
-            var dataTable = $("#dataTable").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["csv", "excel"]
-            }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
             $.ajax({
                 url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat') }}",
                 method: "GET",

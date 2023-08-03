@@ -33,13 +33,6 @@
             <p>Surat Keluar</p>
           </a>
         </li>
-       
-        <li class="nav-item">
-          <a href="/jenis-surat" id="jenisSurat" class="nav-link">
-            <i class="nav-icon fa-solid fa-file-lines"></i>
-            <p>Jenis Surat</p>
-          </a>
-        </li>
 
         <li class="nav-item">
           <a href="/arsip-surat-masuk" id="arsipSuratMasuk" class="nav-link">
@@ -54,13 +47,24 @@
             <p>Arsip Surat Keluar</p>
           </a>
         </li>
-      
-        <li class="nav-item">
-          <a href="add-user" id="addUser" class="nav-link">
-            <i class="nav-icon fa-solid fa-user-plus"></i>
-            <p>Add User</p>
-          </a>
-        </li>
+
+        @if (auth()->user()->role=='admin')
+          <li class="nav-item">
+            <a href="/jenis-surat" id="jenisSurat" class="nav-link">
+              <i class="nav-icon fa-solid fa-file-lines"></i>
+              <p>Jenis Surat</p>
+            </a>
+          </li>
+        
+          <li class="nav-item">
+            <a href="add-user" id="addUser" class="nav-link">
+              <i class="nav-icon fa-solid fa-user-plus"></i>
+              <p>Add User</p>
+            </a>
+          </li>
+        @endif
+
+        
         
       </ul>
     </nav>
