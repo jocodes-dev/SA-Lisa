@@ -67,6 +67,9 @@
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
+  <footer class="text-white d-flex align-items-end" style="position: absolute; top: 1px; height: 100vh;">
+    <small>Copy Right © By Jocodes</small>
+  </footer>
 </aside>
 <script>
   const getId = (id) => document.getElementById(id)

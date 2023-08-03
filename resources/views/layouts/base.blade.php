@@ -121,6 +121,14 @@
     </div>
     <!-- ./wrapper -->
 
+    <footer class="main-footer">
+        <img src="{{ asset('assets/dist/img/stmikadhiguna.png')}}" alt="" class="mr-2" style="width: 25px">
+        Powered By Mahasiswa KKLP STMIK Adhi Guna 2023
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0.0
+        </div>
+    </footer>
+
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
