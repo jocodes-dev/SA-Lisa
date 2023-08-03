@@ -45,6 +45,14 @@ Route::get('/arsip-surat-masuk/{id_jenis_surat}', function () {
     return view('arsipSuratMasukByName');
 });
 
+Route::get('/arsip-surat-keluar', function () {
+    return view('arsipSuratKeluar');
+});
+
+Route::get('/arsip-surat-keluar/{id_jenis_surat}', function () {
+    return view('arsipSuratKeluarByName');
+});
+
 Route::get('/add-user', function () {
     return view('addUser');
 });
