@@ -26,6 +26,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tujuan Surat</th>
+                                        <th>Nama pembuat</th>
                                         <th>No. Surat</th>
                                         <th>Jenis Surat</th>
                                         <th>Tanggal Keluar</th>
@@ -34,7 +35,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tbody">
-                                    
+
                                     <tr id="loading-row" style="display: none;">
                                         <td colspan="9" class="text-center">
                                             <i class="fa fa-spinner fa-spin"></i> Loading...
@@ -73,13 +74,13 @@
                         </div>
                         <div class="form-group">
                             <label for="no_surat">No Surat:</label>
-                            <input type="text" class="form-control" name="no_surat" id="no_surat" placeholder="No Surat">
+                            <input type="text" class="form-control" name="no_surat" id="no_surat"
+                                placeholder="No Surat">
                         </div>
                         <div class="form-group">
-                            <label for="id_jenis_surat">Jenis Surat:</label>
-                            <select class="form-control" name="id_jenis_surat" id="id_jenis_surat"
-                                placeholder="Jenis Surat">
-                                <!-- Fill the options dynamically using JavaScript -->
+                            <label for="id_jenis_surat">Jenis Surat</label>
+                            <select name="id_jenis_surat" id="id_jenis_surat" class="form-control">
+                                <option value="">-- Pilih --</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -102,8 +103,7 @@
                         </div>
                         <div class="form-group">
                             <label for="perihal">Perihal:</label>
-                            <textarea type="text" class="form-control" name="perihal" id="perihal"
-                                placeholder="Perihal"></textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="perihal" placeholder="Perihal"></textarea>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -118,7 +118,8 @@
 
 
     {{-- MODAL EDIT --}}
-    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
+    <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -142,9 +143,9 @@
                                 placeholder="Input Here..">
                         </div>
                         <div class="form-group">
-                            <label for="id_jenis_surat">Jenis Surat:</label>
-                            <select name="id_jenis_surat" id="edit_id_jenis_surat" class="form-control">
-
+                            <label for="id_jenis_surat">Jenis Surat</label>
+                            <select name="id_jenis_surat" id="eid_jenis_surat" class="form-control">
+                                <option value="">-- Pilih --</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -168,8 +169,8 @@
                         </div>
                         <div class="form-group">
                             <label for="perihal">Perihal:</label>
-                            <textarea type="text" class="form-control" name="perihal" id="edit_perihal"
-                                placeholder="Input Here.." rows="3" style="height: 100px;"></textarea>
+                            <textarea type="text" class="form-control" name="perihal" id="edit_perihal" placeholder="Input Here.."
+                                rows="3" style="height: 100px;"></textarea>
                         </div>
                     </form>
                 </div>
@@ -183,46 +184,47 @@
         </div>
     </div>
 
-<script>
-    const Url = 'v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
-    const UrlJenisSurat = 'v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat';
+    <script>
+        const Url = 'v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
+        const UrlJenisSurat = 'v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat';
 
-    // render data api
-    $(document).ready(function () {
-    $("#loading-row").show();
+        // render data api
+        $(document).ready(function() {
+            $("#loading-row").show();
 
-    $.ajax({
-        type: 'GET',
-        dataType: "json",
-        url: `{{ url('${Url}') }}`,
-        success: function (res) {
-            $("#loading-row").hide();
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: `{{ url('${Url}') }}`,
+                success: function(res) {
+                    $("#loading-row").hide();
 
-            if (res.code === 404) {
-                // Handle the case when data is not found
-                $("#tbody").html(`
+                    if (res.code === 404) {
+                        // Handle the case when data is not found
+                        $("#tbody").html(`
                     <tr>
                         <td colspan="7" class="text-center">No data.</td>
                     </tr>
                 `);
-            } else if (res.code === 200) {
-                // Handle the case when data is available
-                if (!res.data || res.data.length === 0) {
-                    $("#tbody").html(`
+                    } else if (res.code === 200) {
+                        // Handle the case when data is available
+                        if (!res.data || res.data.length === 0) {
+                            $("#tbody").html(`
                         <tr>
                             <td colspan="7" class="text-center">No data.</td>
                         </tr>
                     `);
-                } else {
-                    // Clear existing content before appending new rows
-                    $("#tbody").empty();
+                        } else {
+                            // Clear existing content before appending new rows
+                            $("#tbody").empty();
 
-                    // Append each row to the table
-                    res.data.forEach((data, index) => {
-                        const newRow = `
+                            // Append each row to the table
+                            res.data.forEach((data, index) => {
+                                const newRow = `
                             <tr>
                                 <td>${index + 1}</td>
                                 <td>${data.tujuan_surat}</td>
+                                <td>${data.users.name}</td>
                                 <td>${data.no_surat}</td>
                                 <td>${data.jenis_surat.jenis_surat}</td>
                                 <td>${data.tanggal_surat}</td>
@@ -234,367 +236,343 @@
                                 </td>
                             </tr>
                         `;
-                        $("#tbody").append(newRow);
+                                $("#tbody").append(newRow);
+                            });
+                        }
+                    } else {
+                        // Handle other cases or errors
+                        console.log('Error:', res.message);
+                    }
+
+                    // data table
+                    $("#dataTable").DataTable({
+                        "responsive": true,
+                        "lengthChange": true,
+                        "autoWidth": true,
                     });
+                },
+                error: function(error) {
+                    console.log(error);
+                    $("#loading-row").hide();
                 }
-            } else {
-                // Handle other cases or errors
-                console.log('Error:', res.message);
-            }
-
-            // data table
-            $("#dataTable").DataTable({
-                "responsive": true,
-                "lengthChange": true,
-                "autoWidth": true,
             });
-        },
-        error: function (error) {
-            console.log(error);
-            $("#loading-row").hide();
-        }
-    });
 
-    // fungsi download
-    $(document).on('click', '.download', function (event) {
-        event.preventDefault();
+            // fungsi download
+            $(document).on('click', '.download', function(event) {
+                event.preventDefault();
 
-        var filename = $(this).data('filename');
-        var downloadUrl = `{{ asset('uploads/suratKeluar/') }}/${filename}`;
+                var filename = $(this).data('filename');
+                var downloadUrl = `{{ asset('uploads/suratKeluar/') }}/${filename}`;
 
-        var link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = filename;
-        link.click();
-        link.remove();
-    });
-});
+                var link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = filename;
+                link.click();
+                link.remove();
+            });
+        });
 
 
 
-    // get jenis surat
-    $(document).ready(function () {
+        //get data jenis surat for option
         $.ajax({
-            url: `{{ url('${UrlJenisSurat}') }}`,
+            url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat') }}",
             method: "GET",
             dataType: "json",
-            success: function (response) {
-                // console.log(response.data, '<-- response get jenis surat');
-                fillJenisSuratOptions(response.data)
-                fillJenisSuratOptionsEdit(response.data)
+            success: function(response) {
+                console.log(response);
+                var options = '';
+                $.each(response.data, function(index, item) {
+                    options += '<option value="' + item.id +
+                        '">' + item.jenis_surat + '</option>';
+                });
+                $('#id_jenis_surat').append(options);
+                $('#eid_jenis_surat').append(options);
+
             },
-            error: function () {
+            error: function() {
                 console.log("Failed to get data from server");
             }
         });
 
-        // for create
-        function fillJenisSuratOptions(data) {
-            var select = $("#id_jenis_surat");
-            select.empty();
-            for (var i = 0; i < data.length; i++) {
-                var option = $("<option>")
-                    .val(data[i].id)
-                    .text(data[i].jenis_surat);
-
-                select.append(option);
-            }
-        }
-
-        // for update
-        function fillJenisSuratOptionsEdit(data) {
-            var select = $("#edit_id_jenis_surat");
-            select.empty();
-            for (var i = 0; i < data.length; i++) {
-                var option = $("<option>")
-                    .val(data[i].id)
-                    .text(data[i].jenis_surat);
-
-                select.append(option);
-            }
-        }
-    });
-
-    //tambah data
-    $(document).ready(function () {
-        var formTambah = $('#formTambah');
+        //tambah data
+        $(document).ready(function() {
+            var formTambah = $('#formTambah');
             // reset button tambah data
             $("#btn-add").on("click", function() {
-            // Clear the value of the file input
-            $("#file_surat_keluar").val("");
-            // Reset the custom file label
-            $("#nama-surat-keluar").text("Pilih file");
-            // Clear the image preview (optional)
-            $("#preview-add").attr("src", "");
-        });
-
-        // menampilkan nama file yang diisi di form tambah data
-        $('#file_surat_keluar').on('change', function () {
-            var fileName = $(this).val().split('\\').pop();
-            $('#nama-surat-keluar').text(fileName);
-
-            // menampilkan gambar
-            if (this.files && this.files[0]) {
-                const fileAdd = this.files[0];
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    // Display the image preview
-                    $("#preview-add").attr("src", e.target.result);
-                    $("#preview-add").css("display", "block"); // Show the image
-                };
-
-                reader.readAsDataURL(fileAdd);
-            } else {
-                // If no file is selected, clear the image preview and hide it
+                // Clear the value of the file input
+                $("#file_surat_keluar").val("");
+                // Reset the custom file label
+                $("#nama-surat-keluar").text("Pilih file");
+                // Clear the image preview (optional)
                 $("#preview-add").attr("src", "");
-                $("#preview-add").css("display", "none"); // Hide the image
-            }
-        });
+            });
 
-        formTambah.on('submit', function (e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $('#loading-overlay').show();
-            $.ajax({
-                type: 'POST',
-                url: `{{ url('${Url}/create') }}`,
-                data: formData,
-                dataType: 'JSON',
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('.btn-send').addClass("disabled").html("Processing...").attr(
-                        'disabled', true);
-                },
-                complete: function () {
-                    $('.btn-send').removeClass("disabled").html("Submit").attr('disabled',
-                        false);
-                },
-                success: function (data) {
-                    $('#loading-overlay').hide();
-                    if (data.message === 'check your validation') {
-                        var error = data.errors;
-                        var errorMessage = "";
+            // menampilkan nama file yang diisi di form tambah data
+            $('#file_surat_keluar').on('change', function() {
+                var fileName = $(this).val().split('\\').pop();
+                $('#nama-surat-keluar').text(fileName);
 
-                        $.each(error, function (key, value) {
-                            errorMessage += value[0] + "<br>";
-                        });
-                        Swal.fire({
-                            title: 'Error',
-                            html: errorMessage,
-                            icon: 'error',
-                            timer: 5000,
-                            showConfirmButton: true
-                        });
-                    } else {
-                        $('#loading-overlay').hide();
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'Data Success Create',
-                            icon: 'success',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK'
-                        }).then(function () {
-                            location.reload();
-                        });
-                    }
-                },
-                error: function (data) {
-                    $('#loading-overlay').hide();
-                    var error = data.responseJSON.errors;
-                    var errorMessage = "";
-                    $.each(error, function (key, value) {
-                        errorMessage += value[0] + "<br>";
-                    });
-                    Swal.fire({
-                        title: 'Error',
-                        html: errorMessage,
-                        icon: 'error',
-                        timer: 5000,
-                        showConfirmButton: true
-                    });
+                // menampilkan gambar
+                if (this.files && this.files[0]) {
+                    const fileAdd = this.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        // Display the image preview
+                        $("#preview-add").attr("src", e.target.result);
+                        $("#preview-add").css("display", "block"); // Show the image
+                    };
+
+                    reader.readAsDataURL(fileAdd);
+                } else {
+                    // If no file is selected, clear the image preview and hide it
+                    $("#preview-add").attr("src", "");
+                    $("#preview-add").css("display", "none"); // Hide the image
                 }
             });
-        });
-    });
 
-    //edit
-    $(document).on('click', '#edit-modal', function () {
-        let uuid = $(this).data('uuid');
-        // menampilkan nama file yang baru diisi di form edit data
-        $('#edit_file_surat_keluar').on('change', function () {
-            var fileName = $(this).val().split('\\').pop();
-            $('#edit_file_surat-label').text(fileName);
-
-            // menampilkan gambar
-            if (this.files && this.files[0]) {
-                const fileEdit = this.files[0];
-                const reader = new FileReader();
-
-                reader.onload = function(e) {
-                    // Display the image preview
-                    $("#preview-edit").attr("src", e.target.result);
-                };
-
-                reader.readAsDataURL(fileEdit);
-            }
-        });
-        $.ajax({
-            url: `{{ url('${Url}/get/${uuid}') }}`,
-            type: 'GET',
-            dataType: 'JSON',
-            success: function (data) {
-                console.log('get data =>', data);
-                $('#uuid').val(data.data.uuid);
-                $('#edit_tujuan_surat').val(data.data.tujuan_surat)
-                $('#edit_no_surat').val(data.data.no_surat)
-                $('#edit_perihal').val(data.data.perihal)
-                $('#edit_tanggal_surat').val(data.data.tanggal_surat)
-                $('#edit_id_jenis_surat').val(data.data.id_jenis_surat)
-                $('#edit_id_user').val(data.data.id_user)
-
-                $('#preview-edit').attr('src', "{{ asset('uploads/SuratKeluar/') }}/" + data.data
-                    .file_surat_keluar);
-
-                // menampilkan nama file edit yang sudah tersimpan
-                var fileName = data.data.file_surat_keluar.split('\\').pop();
-                $('#edit_file_surat-label').text(fileName);
-
-                $('#EditModal').modal('show');
-            },
-            error: function () {
-                alert("Error fetching data.");
-            }
-        });
-    });
-
-    // update
-    $(document).ready(function () {
-        var formEdit = $('#formEdit');
-        formEdit.on('submit', function (e) {
-            e.preventDefault();
-            var uuid = $('#uuid').val();
-            var formData = new FormData(this);
-            $('#loading-overlay').show();
-            $.ajax({
-                type: "POST",
-                url: `{{ url('${Url}/update/') }}/${uuid}`,
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                beforeSend: function () {
-                    $('.btn-update').addClass("disabled").html("Processing...").attr(
-                        'disabled', true);
-                },
-                complete: function () {
-                    $('.btn-update').removeClass("disabled").html("Update Data").attr(
-                        'disabled', false);
-                },
-                success: function (data) {
-                    $('#loading-overlay').hide();
-                    if (data.message === 'check your validation') {
-                        var error = data.errors;
-                        var errorMessage = "";
-                        $.each(error, function (key, value) {
-                            errorMessage += value[0] + "<br>";
-                        });
-                        Swal.fire({
-                            title: 'Error',
-                            html: errorMessage,
-                            icon: 'error',
-                            timer: 5000,
-                            showConfirmButton: true
-                        });
-                    } else {
-                        $('#loading-overlay').hide();
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'Data Success Update',
-                            icon: 'success',
-                            showCancelButton: false,
-                            confirmButtonText: 'OK'
-                        }).then(function () {
-                            location.reload();
-                        });
-                    }
-                },
-                error: function (data) {
-                    $('#loading-overlay').hide();
-                    var errors = data.responseJSON.errors;
-                    var errorMessage = "";
-
-                    $.each(errors, function (key, value) {
-                        errorMessage += value + "<br>";
-                    });
-
-                    Swal.fire({
-                        title: "Error",
-                        html: errorMessage,
-                        icon: "error",
-                        timer: 5000,
-                        showConfirmButton: true
-                    });
-                }
-            });
-        });
-    });
-
-    //delete
-    $(document).on('click', '#delete-confirm', function (e) {
-        e.preventDefault();
-        var uuid = $(this).data('uuid');
-        Swal.fire({
-            title: 'Anda yakin ingin menghapus data ini?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Delete',
-            cancelButtonText: 'Cancel',
-            resolveButton: true
-        }).then((result) => {
-            if (result.isConfirmed) {
+            formTambah.on('submit', function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $('#loading-overlay').show();
                 $.ajax({
-                    url: `{{ url('${Url}/delete/${uuid}') }}`,
-                    type: 'DELETE',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "uuid": uuid
+                    type: 'POST',
+                    url: `{{ url('${Url}/create') }}`,
+                    data: formData,
+                    dataType: 'JSON',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('.btn-send').addClass("disabled").html("Processing...").attr(
+                            'disabled', true);
                     },
-                    success: function (response) {
-                        if (response.code === 200) {
-                            Swal.fire({
-                                title: 'Data berhasil dihapus',
-                                icon: 'success',
-                                timer: 5000,
-                                showConfirmButton: true
-                            }).then((result) => {
-                                location.reload();
+                    complete: function() {
+                        $('.btn-send').removeClass("disabled").html("Submit").attr('disabled',
+                            false);
+                    },
+                    success: function(data) {
+                        $('#loading-overlay').hide();
+                        if (data.message === 'check your validation') {
+                            var error = data.errors;
+                            var errorMessage = "";
+
+                            $.each(error, function(key, value) {
+                                errorMessage += value[0] + "<br>";
                             });
-                        } else {
                             Swal.fire({
-                                title: 'Gagal menghapus data',
-                                text: response.message,
+                                title: 'Error',
+                                html: errorMessage,
                                 icon: 'error',
                                 timer: 5000,
                                 showConfirmButton: true
                             });
+                        } else {
+                            $('#loading-overlay').hide();
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'Data Success Create',
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'OK'
+                            }).then(function() {
+                                location.reload();
+                            });
                         }
                     },
-                    error: function () {
+                    error: function(data) {
+                        $('#loading-overlay').hide();
+                        var error = data.responseJSON.errors;
+                        var errorMessage = "";
+                        $.each(error, function(key, value) {
+                            errorMessage += value[0] + "<br>";
+                        });
                         Swal.fire({
-                            title: 'Terjadi kesalahan',
-                            text: 'Gagal menghapus data',
+                            title: 'Error',
+                            html: errorMessage,
                             icon: 'error',
                             timer: 5000,
                             showConfirmButton: true
                         });
                     }
                 });
-            }
+            });
         });
-    });
 
-</script>
+        //edit
+        $(document).on('click', '#edit-modal', function() {
+            let uuid = $(this).data('uuid');
+            // menampilkan nama file yang baru diisi di form edit data
+            $('#edit_file_surat_keluar').on('change', function() {
+                var fileName = $(this).val().split('\\').pop();
+                $('#edit_file_surat-label').text(fileName);
 
+                // menampilkan gambar
+                if (this.files && this.files[0]) {
+                    const fileEdit = this.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        // Display the image preview
+                        $("#preview-edit").attr("src", e.target.result);
+                    };
+
+                    reader.readAsDataURL(fileEdit);
+                }
+            });
+            $.ajax({
+                url: `{{ url('${Url}/get/${uuid}') }}`,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function(data) {
+                    console.log('get data =>', data);
+                    $('#uuid').val(data.data.uuid);
+                    $('#edit_tujuan_surat').val(data.data.tujuan_surat)
+                    $('#edit_no_surat').val(data.data.no_surat)
+                    $('#edit_perihal').val(data.data.perihal)
+                    $('#edit_tanggal_surat').val(data.data.tanggal_surat)
+                    $('#eid_jenis_surat').val(data.data.id_jenis_surat)
+                    $('#edit_id_user').val(data.data.id_user)
+
+                    $('#preview-edit').attr('src', "{{ asset('uploads/SuratKeluar/') }}/" + data.data
+                        .file_surat_keluar);
+
+                    // menampilkan nama file edit yang sudah tersimpan
+                    var fileName = data.data.file_surat_keluar.split('\\').pop();
+                    $('#edit_file_surat-label').text(fileName);
+
+                    $('#EditModal').modal('show');
+                },
+                error: function() {
+                    alert("Error fetching data.");
+                }
+            });
+        });
+
+        // update
+        $(document).ready(function() {
+            var formEdit = $('#formEdit');
+            formEdit.on('submit', function(e) {
+                e.preventDefault();
+                var uuid = $('#uuid').val();
+                var formData = new FormData(this);
+                $('#loading-overlay').show();
+                $.ajax({
+                    type: "POST",
+                    url: `{{ url('${Url}/update/') }}/${uuid}`,
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('.btn-update').addClass("disabled").html("Processing...").attr(
+                            'disabled', true);
+                    },
+                    complete: function() {
+                        $('.btn-update').removeClass("disabled").html("Update Data").attr(
+                            'disabled', false);
+                    },
+                    success: function(data) {
+                        $('#loading-overlay').hide();
+                        if (data.message === 'check your validation') {
+                            var error = data.errors;
+                            var errorMessage = "";
+                            $.each(error, function(key, value) {
+                                errorMessage += value[0] + "<br>";
+                            });
+                            Swal.fire({
+                                title: 'Error',
+                                html: errorMessage,
+                                icon: 'error',
+                                timer: 5000,
+                                showConfirmButton: true
+                            });
+                        } else {
+                            $('#loading-overlay').hide();
+                            Swal.fire({
+                                title: 'Success',
+                                text: 'Data Success Update',
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'OK'
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        $('#loading-overlay').hide();
+                        var errors = data.responseJSON.errors;
+                        var errorMessage = "";
+
+                        $.each(errors, function(key, value) {
+                            errorMessage += value + "<br>";
+                        });
+
+                        Swal.fire({
+                            title: "Error",
+                            html: errorMessage,
+                            icon: "error",
+                            timer: 5000,
+                            showConfirmButton: true
+                        });
+                    }
+                });
+            });
+        });
+
+        //delete
+        $(document).on('click', '#delete-confirm', function(e) {
+            e.preventDefault();
+            var uuid = $(this).data('uuid');
+            Swal.fire({
+                title: 'Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Delete',
+                cancelButtonText: 'Cancel',
+                resolveButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: `{{ url('${Url}/delete/${uuid}') }}`,
+                        type: 'DELETE',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "uuid": uuid
+                        },
+                        success: function(response) {
+                            if (response.code === 200) {
+                                Swal.fire({
+                                    title: 'Data berhasil dihapus',
+                                    icon: 'success',
+                                    timer: 5000,
+                                    showConfirmButton: true
+                                }).then((result) => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Gagal menghapus data',
+                                    text: response.message,
+                                    icon: 'error',
+                                    timer: 5000,
+                                    showConfirmButton: true
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                title: 'Terjadi kesalahan',
+                                text: 'Gagal menghapus data',
+                                icon: 'error',
+                                timer: 5000,
+                                showConfirmButton: true
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection
