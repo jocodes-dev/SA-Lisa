@@ -28,20 +28,31 @@
 const urlLogout = 'v4/56cfb271-4e29-47cc-a237-8ae819491903/user/logout'
 $(document).ready(function() {
   $('#logoutButton').click(function(e) {
-    e.preventDefault();
-    $.ajax({
-      url: `{{ url('${urlLogout}') }}`,
-      method: 'POST',
-      dataType: 'json',
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function(response) {
-        localStorage.removeItem('access_token');
-        window.location.href = '/login';
-      },
-      error: function(xhr, status, error) {
-        alert('Error: Failed to logout. Please try again.');
+    Swal.fire({
+      title: 'Yakin ingin Logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'Cancel',
+      resolveButton: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        e.preventDefault();
+        $.ajax({
+          url: `{{ url('${urlLogout}') }}`,
+          method: 'POST',
+          dataType: 'json',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response) {
+            localStorage.removeItem('access_token');
+            window.location.href = '/login';
+          },
+          error: function(xhr, status, error) {
+            alert('Error: Failed to logout. Please try again.');
+          }
+        });
       }
     });
   });
