@@ -58,20 +58,20 @@ $(document).ready(function() {
   });
 });
 
-const apiCheck = "v2/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk";
+// const apiCheck = "v2/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk";
 
-$(document).ready(function() {
-  $.ajax({
-    url: `{{ url('${apiCheck}') }}`,
-    method: "GET",
-    dataType: "json",
-    success: function(response) {
-      // console.log(response, '<-- success to login');
-    },
-    error: function() {
-      console.log("Failed to get data from server || dari navbar");
-      window.location.href = '/login';
-    }
-  });
-});
+// $(document).ready(function() {
+//   $.ajax({
+//     url: `{{ url('${apiCheck}') }}`,
+//     method: "GET",
+//     dataType: "json",
+//     success: function(response) {
+//       // console.log(response, '<-- success to login');
+//     },
+//     error: function() {
+//       console.log("Failed to get data from server || dari navbar");
+//       window.location.href = '/login';
+//     }
+//   });
+// });
 </script>
