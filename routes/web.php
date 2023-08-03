@@ -71,6 +71,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     // route surat keluar
     Route::prefix('v3')->controller(SuratKeluarController::class)->group(function () {
         Route::get('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar', 'getAllData');
+        Route::get('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/filter/{id_jenis_surat}/', 'filterData');
         Route::post('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/create', 'createData');
         Route::get('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/get/{uuid}', 'getDataByUuid');
         Route::post('/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/update/{uuid}', 'updateDataByUuid');
