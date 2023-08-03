@@ -38,7 +38,7 @@ class SuratKeluarController extends Controller
                 'id_jenis_surat'=> 'required',
                 'tanggal_surat' => 'required|date',
                 'perihal' => 'required',
-                'asal_surat' => 'required',
+                'tujuan_surat' => 'required',
                 'file_surat_keluar' =>'required|mimes:png,jpg,pdf,docx,doc|max:2048',
 
             ],
@@ -47,7 +47,7 @@ class SuratKeluarController extends Controller
                 'id_jenis_surat.required' => 'Form id_jenis_surat tidak boleh kosong',
                 'tanggal_surat.required' => 'Form tanggal_surat tidak boleh kosong',
                 'perihal.required' => 'Form perihal tidak boleh kosong',
-                'asal_surat.required' => 'Form asal_surat tidak boleh kosong',
+                'tujuan_surat.required' => 'Form tujuan_surat tidak boleh kosong',
                 'file_surat_keluar.required' => 'Form  file_surat tidak boleh kosong',
                 'file_surat_keluar.mimes' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
@@ -69,7 +69,7 @@ class SuratKeluarController extends Controller
             $data->id_jenis_surat = $request->input('id_jenis_surat');
             $data->tanggal_surat = $request->input('tanggal_surat');
             $data->perihal = $request->input('perihal');
-            $data->asal_surat = $request->input('asal_surat');
+            $data->tujuan_surat = $request->input('tujuan_surat');
             if($request->hasFile('file_surat_keluar')){
                 $file= $request->file('file_surat_keluar');
                 $extention= $file->getClientOriginalExtension();
@@ -127,7 +127,7 @@ class SuratKeluarController extends Controller
                 'id_jenis_surat' => 'required',
                 'tanggal_surat' => 'required|date',
                 'perihal' => 'required',
-                'asal_surat' => 'required',
+                'tujuan_surat' => 'required',
                 'file_surat_keluar' => 'required|mimes:png,jpg,pdf,docx,doc|max:2048',
 
             ],
@@ -136,7 +136,7 @@ class SuratKeluarController extends Controller
                 'id_jenis_surat.required' => 'Form id_jenis_surat tidak boleh kosong',
                 'tanggal_surat.required' => 'Form tanggal_surat tidak boleh kosong',
                 'perihal.required' => 'Form perihal tidak boleh kosong',
-                'asal_surat.required' => 'Form asal_surat tidak boleh kosong',
+                'tujuan_surat.required' => 'Form tujuan_surat tidak boleh kosong',
                 'file_surat_keluar.required' => 'Form  file_surat tidak boleh kosong',
                 'file_surat_keluar.mimes' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
@@ -155,7 +155,7 @@ class SuratKeluarController extends Controller
             $data->id_jenis_surat = $request->input('id_jenis_surat');
             $data->tanggal_surat = $request->input('tanggal_surat');
             $data->perihal = $request->input('perihal');
-            $data->asal_surat = $request->input('asal_surat');
+            $data->tujuan_surat = $request->input('tujuan_surat');
             if ($request->hasFile('file_surat_keluar')) {
                 $file = $request->file('file_surat_keluar');
                 $extention = $file->getClientOriginalExtension();
