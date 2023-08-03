@@ -125,6 +125,7 @@
         <img src="{{ asset('assets/dist/img/stmikadhiguna.png')}}" alt="" class="mr-2" style="width: 25px">
         Powered By Mahasiswa KKLP STMIK Adhi Guna 2023
         <div class="float-right d-none d-sm-inline-block">
+            <small>Copy Right © By Jocodes</small>
             <b>Version</b> 1.0.0
         </div>
     </footer>
