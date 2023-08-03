@@ -38,6 +38,10 @@ Route::get('/arsip', function () {
     return view('arsip');
 });
 
+Route::get('/add-user', function () {
+    return view('addUser');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
