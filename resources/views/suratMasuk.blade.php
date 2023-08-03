@@ -82,10 +82,6 @@
                             <label for="file_surat_masuk">file surat masuk</label>
                             <input type="file" class="form-control" name="file_surat_masuk" id="file_surat_masuk" placeholder="Input Here..">
                         </div>
-                        <div class="form-group">
-                            <label for="id_user">id_user</label>
-                            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Input Here..">
-                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
@@ -143,11 +139,6 @@
                     <div class="form-group">
                         <label for="file_surat_masuk">preview</label>
                         <img src="" alt="" id="preview" class="w-100">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="id_user">id_user</label>
-                        <input type="text" class="form-control" name="id_user" id="edit_id_user" placeholder="Input Here..">
                     </div>
                 </form>
             </div>
@@ -354,7 +345,7 @@ $(document).on('click', '.edit-modal', function() {
             $('#edit_file_surat_masuk-label').text(filename)
 
             $('#preview').attr('src', `{{ asset('uploads/suratMasuk/${response.data.file_surat_masuk}')}}`)
-            $('#edit_id_user').val(response.data.id_user)
+            // $('#edit_id_user').val(response.data.id_user)
 
             $('#EditModal').modal('show');
         },

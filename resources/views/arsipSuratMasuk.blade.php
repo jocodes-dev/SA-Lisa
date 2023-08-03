@@ -33,27 +33,23 @@
 <script>
 $(document).ready(function() {
     // handle cetak data
-    var dataTable = $("#dataTable").DataTable({
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "buttons": ["csv", "excel"]
-    }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
     $.ajax({
         url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat') }}",
         method: "GET",
         dataType: "json",
         success: function(response) {
+            console.log(response, '<-- get data semua jenis surat');
             var tableBody = "";
             // console.log(response, '<-- jika berhasil');
+          
             $.each(response.data, function(index, item) {
                 tableBody += /*html*/
                     `<tr>
                         <td>${(index + 1)}</td> 
                         <td>${item.jenis_surat}</td>
                         <td>
-                            <a href="/arsip-surat-masuk/name">
-                                <button class='btn btn-warning download-link' data-filename="">
+                            <a href="/arsip-surat-masuk/${item.id}" data-id="${item.id}">
+                                <button class='btn btn-warning download-link' data-id="">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
                             </a>
