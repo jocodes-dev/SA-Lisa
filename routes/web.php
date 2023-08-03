@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\JenisSuratController;
 use App\Http\Controllers\Api\SuratKeluarController;
 use App\Http\Controllers\Api\SuratMasukController;
@@ -16,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('count',[DashboardController::class,'countData']);
+
 
 
 Route::get('/', function () {
