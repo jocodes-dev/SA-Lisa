@@ -182,6 +182,7 @@ class UserController extends Controller
                     'message' => 'Data Not Found',
                 ]);
             }
+            $data->tokens()->delete();
             $data->delete();
         } catch (\Throwable $th) {
             return response()->json([
