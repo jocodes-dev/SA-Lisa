@@ -117,7 +117,7 @@ class UserController extends Controller
             $request->all(),
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email',
                 'password' => 'required|confirmed|min:6',
                 'password_confirmation' => 'required'
             ],
@@ -127,8 +127,7 @@ class UserController extends Controller
                 'password.required' => 'Form password tidak boleh kosong',
                 'password_confirmation.required' => 'Form password_confirmation tidak boleh kosong',
                 'email.email' => 'Mohon isi alamat email dengan format yang benar',
-                'email.unique' => 'Email digunakan',
-                'password.confirmed' => 'Password tidak sama'
+                'password.confirmed' => 'Password tidak sama',
             ]
         );
 
