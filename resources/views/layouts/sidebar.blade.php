@@ -21,30 +21,37 @@
         </li>
 
         <li class="nav-item">
-          <a href="surat-masuk" id="suratMasuk" class="nav-link">
+          <a href="/surat-masuk" id="suratMasuk" class="nav-link">
             <i class="nav-icon fa-solid fa-file-arrow-down"></i>
             <p>Surat Masuk</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="surat-keluar" id="suratKeluar" class="nav-link">
+          <a href="/surat-keluar" id="suratKeluar" class="nav-link">
             <i class="nav-icon fa-solid fa-file-arrow-up"></i>
             <p>Surat Keluar</p>
           </a>
         </li>
        
         <li class="nav-item">
-          <a href="jenis-surat" id="jenisSurat" class="nav-link">
+          <a href="/jenis-surat" id="jenisSurat" class="nav-link">
             <i class="nav-icon fa-solid fa-file-lines"></i>
             <p>Jenis Surat</p>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="arsip" id="arsip" class="nav-link">
+          <a href="/arsip-surat-masuk" id="arsipSuratMasuk" class="nav-link">
             <i class="nav-icon fa-solid fa-box-archive"></i>
-            <p>Arsip</p>
+            <p>Arsip Surat Masuk</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/arsip-surat-keluar" id="arsipSuratKeluar" class="nav-link">
+            <i class="nav-icon fa-solid fa-box-archive"></i>
+            <p>Arsip Surat Keluar</p>
           </a>
         </li>
       
@@ -69,18 +76,22 @@
     const url = new URL(currentUrl);
     const routePath = url.pathname;   // route name
 
+    const activeClass = (id) => getId(id).classList.add('active')
+
     if (routePath === '/') {
-      getId('dashboard').classList.add('active')
+      activeClass('dashboard')
     } else if(routePath === '/surat-masuk') {
-      getId('suratMasuk').classList.add('active')
+      activeClass('suratMasuk')
     } else if (routePath === '/surat-keluar') {
-      getId('suratKeluar').classList.add('active')
+      activeClass('suratKeluar')
     } else if (routePath === '/jenis-surat') {
-      getId('jenisSurat').classList.add('active')
-    } else if (routePath === '/arsip') {
-      getId('arsip').classList.add('active')
+      activeClass('jenisSurat')
+    } else if (routePath === '/arsip-surat-masuk' || routePath === '/arsip-surat-masuk/name') {
+      activeClass('arsipSuratMasuk')
+    } else if (routePath === '/arsip-surat-keluar' || routePath === '/arsip-surat-keluar/name') {
+      activeClass('arsipSuratKeluar')
     } else if (routePath === '/add-user') {
-      getId('addUser').classList.add('active')
+      activeClass('addUser')
     }
   }
   checkActiveMenu()
