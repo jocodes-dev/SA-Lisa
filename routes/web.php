@@ -41,7 +41,7 @@ Route::get('/arsip-surat-masuk', function () {
     return view('arsipSuratMasuk');
 });
 
-Route::get('/arsip-surat-masuk/name', function () {
+Route::get('/arsip-surat-masuk/{id_jenis_surat}', function () {
     return view('arsipSuratMasukByName');
 });
 
@@ -69,7 +69,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     // route surat masuk
     Route::prefix('v2')->controller(SuratMasukController::class)->group(function () {
         Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk', 'getAllData');
-        Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/filter/{id_jenis_surat}/', 'getAllData');
+        Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/filter/{id_jenis_surat}/', 'filterData');
         Route::post('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/create', 'createData');
         Route::get('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/get/{uuid}', 'getDataByUuid');
         Route::post('/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk/update/{uuid}', 'updateDataByUuid');
