@@ -19,7 +19,9 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="../../index2.html" class="h1"><b>Kel. lurah</b></a>
+      <img src="{{ asset('assets/dist/img/lambang_kota_palu.png')}}" alt="" style="width: 75px">
+      <br>
+      <span class="h3"><b>Kel. Besusu Timur</b></span>
     </div>
     <div class="card-body">
       @include('sweetalert::alert')
@@ -120,7 +122,6 @@ $(document).ready(function() {
     dataType: "json",
     success: function(response) {
       window.location.href = '/';
-      console.log(response, '<-- success to login');
     },
     error: function() {
 
