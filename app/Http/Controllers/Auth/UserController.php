@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function getAllData()
     {
-        $data = User::all();
+        $data = User::where('role', 'user')->get();;
         if ($data->isEmpty()) {
             return response()->json([
                 'code' => 404,
