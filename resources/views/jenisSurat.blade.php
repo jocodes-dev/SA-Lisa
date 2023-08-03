@@ -101,7 +101,7 @@
                 "buttons": ["csv", "excel"]
             }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
             $.ajax({
-                url: "{{ url('api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat') }}",
+                url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat') }}",
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
@@ -138,7 +138,7 @@
                 $('#loading-overlay').show();
                 $.ajax({
                     type: 'POST',
-                    url: '{{ url('api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/create') }}',
+                    url: '{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/create') }}',
                     data: formData,
                     dataType: 'JSON',
                     contentType: false,
@@ -200,7 +200,7 @@
         $(document).on('click', '.edit-modal', function() {
             var uuid = $(this).data('uuid');
             $.ajax({
-                url: "{{ url('api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/get/') }}/" + uuid,
+                url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/get/') }}/" + uuid,
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -224,7 +224,7 @@
                 $('#loading-overlay').show();
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/update/') }}/" +
+                    url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/update/') }}/" +
                         uuid,
                     data: formData,
                     dataType: 'json',
@@ -294,7 +294,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ url('api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/delete/') }}/" +
+                        url: "{{ url('v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat/delete/') }}/" +
                             uuid,
                         type: 'DELETE',
                         data: {

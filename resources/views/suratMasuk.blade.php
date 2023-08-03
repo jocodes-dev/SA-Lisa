@@ -82,10 +82,6 @@
                             <label for="file_surat_masuk">file surat masuk</label>
                             <input type="file" class="form-control" name="file_surat_masuk" id="file_surat_masuk" placeholder="Input Here..">
                         </div>
-                        <div class="form-group">
-                            <label for="id_user">id_user</label>
-                            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Input Here..">
-                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
@@ -145,10 +141,6 @@
                         <img src="" alt="" id="preview" class="w-100">
                     </div>
 
-                    <div class="form-group">
-                        <label for="id_user">id_user</label>
-                        <input type="text" class="form-control" name="id_user" id="edit_id_user" placeholder="Input Here..">
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -160,17 +152,17 @@
     </div>
 </div>
 <script>
-const apiUrl = "api/v2/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk";
-const apiJenisSurat = "api/v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat"
+const apiUrl = "v2/5d089a00-904c-40aa-8fb5-6bdd21bfafe2/surat_masuk";
+const apiJenisSurat = "v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat"
 
 $(document).ready(function() {
     // handle cetak data
-    var dataTable = $("#dataTable").DataTable({
-        "responsive": true,
-        "lengthChange": false,
-        "autoWidth": false,
-        "buttons": ["csv", "excel"]
-    }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
+    // var dataTable = $("#dataTable").DataTable({
+    //     "responsive": true,
+    //     "lengthChange": false,
+    //     "autoWidth": false,
+    //     "buttons": ["csv", "excel"]
+    // }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
     $.ajax({
         url: `{{ url('${apiUrl}') }}`,
         method: "GET",
