@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tanggal_surat');
             $table->text('perihal');
             $table->string('file_surat_keluar');
-            $table->string('asal_surat');
+            $table->string('tujuan_surat');
             $table->timestamps();
         });
     }
