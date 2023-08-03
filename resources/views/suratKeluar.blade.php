@@ -105,10 +105,6 @@
                             <textarea type="text" class="form-control" name="perihal" id="perihal"
                                 placeholder="Perihal"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="id_user">Id User</label>
-                            <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Input Here..">
-                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
@@ -174,11 +170,6 @@
                             <label for="perihal">Perihal:</label>
                             <textarea type="text" class="form-control" name="perihal" id="edit_perihal"
                                 placeholder="Input Here.." rows="3" style="height: 100px;"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="id_user">Id_User</label>
-                            <input type="text" class="form-control" name="id_user" id="edit_id_user"
-                                placeholder="Input Here..">
                         </div>
                     </form>
                 </div>
@@ -254,10 +245,9 @@
             // data table
             $("#dataTable").DataTable({
                 "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["csv", "excel"]
-            }).buttons().container().appendTo('.dataTables_wrapper .col-md-6:eq(0)');
+                "lengthChange": true,
+                "autoWidth": true,
+            });
         },
         error: function (error) {
             console.log(error);

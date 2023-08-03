@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('count',[DashboardController::class,'countData']);
 
-
-
-
-
 Route::get('/login', function () {
     return view('login');
 });
@@ -51,9 +47,18 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/arsip-surat-masuk', function () {
         return view('arsipSuratMasuk');
     });
+
+    Route::get('/arsip-surat-keluar/{id_jenis_surat}', function () {
+        return view('arsipSuratKeluarByName');
+    });
+    
     
     Route::get('/arsip-surat-masuk/{id_jenis_surat}', function () {
         return view('arsipSuratMasukByName');
+    });
+
+    Route::get('/arsip-surat-keluar', function () {
+        return view('arsipSuratKeluar');
     });
     
     Route::get('/add-user', function () {

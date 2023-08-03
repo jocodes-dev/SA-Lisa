@@ -195,7 +195,7 @@ class SuratKeluarController extends Controller
                 'tanggal_surat' => 'required|date',
                 'perihal' => 'required',
                 'tujuan_surat' => 'required',
-                'file_surat_keluar' => 'required|mimes:png,jpg,pdf,docx,doc|max:2048',
+                'file_surat_keluar' => 'mimes:png,jpg,pdf,docx,doc|max:2048',
 
             ],
             [
@@ -204,7 +204,6 @@ class SuratKeluarController extends Controller
                 'tanggal_surat.required' => 'Form tanggal_surat tidak boleh kosong',
                 'perihal.required' => 'Form perihal tidak boleh kosong',
                 'tujuan_surat.required' => 'Form tujuan_surat tidak boleh kosong',
-                'file_surat_keluar.required' => 'Form  file_surat tidak boleh kosong',
                 'file_surat_keluar.mimes' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
