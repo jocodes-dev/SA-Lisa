@@ -27,9 +27,9 @@
                 <tr>
                     <th>No</th>
                     <th>Asal Surat</th>
+                    <th>Jenis Surat</th>
                     <th>No Surat</th>
                     <th>Perihal</th>
-                    <th>Jenis Surat</th>
                     <th>Tanggal Surat Masuk</th>
                     <th>Nama Pembuat</th>
                     <th>Action</th>
@@ -175,9 +175,9 @@ $(document).ready(function() {
                     `<tr>
                         <td>${(index + 1)}</td>
                         <td>${item.asal_surat}</td>
+                        <td>${item.jenis_surat.jenis_surat}</td>
                         <td>${item.no_surat}</td>
                         <td>${item.perihal}</td>
-                        <td>${item.jenis_surat.jenis_surat}</td>
                         <td>${item.tanggal_surat}</td>
                         <td>${item.users.name}</td>
 
