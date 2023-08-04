@@ -205,7 +205,6 @@ class SuratMasukController extends Controller
                 'tanggal_surat.required' => 'Form tanggal_surat tidak boleh kosong',
                 'perihal.required' => 'Form perihal tidak boleh kosong',
                 'asal_surat.required' => 'Form asal_surat tidak boleh kosong',
-                'file_surat_masuk.required' => 'Form  file_surat tidak boleh kosong',
                 'file_surat_masuk.mimes' => 'Ekstensi file harus png,jpg,pdf,docx,doc',
             ]
         );
@@ -218,7 +217,7 @@ class SuratMasukController extends Controller
             ]);
         }
         try {
-            $data = SuratMasukModel::where('uuid', $uuid)->firstOrFail();
+            $data = SuratMasukModel::where('uuid', $uuid)->first();
             $data->no_surat = $request->input('no_surat');
             $data->id_jenis_surat = $request->input('id_jenis_surat');
             $data->tanggal_surat = $request->input('tanggal_surat');

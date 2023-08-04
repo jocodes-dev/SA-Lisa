@@ -48,48 +48,51 @@
                             @csrf
                             <input type="hidden" name="uuid" id="uuid">
                             <div class="form-group">
-                                <label for="tujuan_surat">Tujuan surat</label>
+                                <label for="tujuan_surat">Tujuan Surat:</label>
                                 <input type="text" class="form-control" name="tujuan_surat" id="edit_tujuan_surat"
                                     placeholder="Input Here..">
                             </div>
                             <div class="form-group">
-                                <label for="no_surat">no surat</label>
+                                <label for="no_surat">No Surat:</label>
                                 <input type="text" class="form-control" name="no_surat" id="edit_no_surat"
                                     placeholder="Input Here..">
                             </div>
                             <div class="form-group">
-                                <label for="perihal">perihal</label>
-                                <input type="text" class="form-control" name="perihal" id="edit_perihal"
-                                    placeholder="Input Here..">
-                            </div>
-                            <div class="form-group">
-                                <label for="tanggal_surat">tanggal surat</label>
-                                <input type="date" class="form-control" name="tanggal_surat" id="edit_tanggal_surat"
-                                    placeholder="Input Here..">
-                            </div>
-                            <div class="form-group" style="display: none">
-                                <label for="id_jenis_surat">jenis surat</label>
-                                <select name="id_jenis_surat" id="edit_id_jenis_surat" class="form-control">
-
+                                <label for="id_jenis_surat">Jenis Surat</label>
+                                <select name="id_jenis_surat" id="eid_jenis_surat" class="form-control">
+                                    <option value="">-- Pilih --</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="">file surat masuk</label>
-                                <input type="file" class="form-control" name="file_surat_keluar"
-                                    id="edit_file_surat_keluar" placeholder="Input Here..">
-                                <label for="edit_file_surat_keluar" id="edit_file_surat_keluar-label"></label>
+                                <label for="tanggal_surat">Tanggal Surat Keluar:</label>
+                                <input type="date" class="form-control" name="tanggal_surat" id="edit_tanggal_surat"
+                                    placeholder="Input Here..">
                             </div>
-
                             <div class="form-group">
-                                <label for="file_surat_keluar">preview</label>
-                                <img src="" alt="" id="preview" class="w-100">
+                                <label for="file_surat_keluar">Input File Surat</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="file_surat_keluar"
+                                            id="edit_file_surat_keluar">
+                                        <label class="custom-file-label" id="edit_file_surat-label"
+                                            for="file_surat_keluar">Pilih file</label>
+                                    </div>
+                                </div>
+                                <span>format : Jpg,png,pdf,doc </span>
+                                <img src="" id="preview-edit" class="mx-auto d-block pb-2"
+                                    style="max-width: 300px; haight: 100px; padding-top: 23px;">
                             </div>
-
+                            <div class="form-group">
+                                <label for="perihal">Perihal:</label>
+                                <textarea type="text" class="form-control" name="perihal" id="edit_perihal" placeholder="Input Here.." rows="3"
+                                    style="height: 100px;"></textarea>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" form="formEdit" class="btn btn-outline-primary">Update Data</button>
+                        <button type="submit" form="formEdit" class="btn btn-outline-primary btn-update btn-update">Update
+                            Data</button>
                     </div>
 
                 </div>
@@ -118,30 +121,28 @@
                     var tableBody = "";
                     $.each(response.data, function(index, item) {
                         tableBody += /*html*/
-                            `<tr>
-                        <td>${(index + 1)}</td> 
-                        <td>${item.tujuan_surat}</td>
-                        <td>${item.users.name}</td>
-                        <td>${item.no_surat}</td>
-                        <td>${item.perihal}</td>
-                        <td>${item.jenis_surat.jenis_surat}</td>
-                        <td>${item.tanggal_surat}</td>
-
-                        
-                        <td>
-                            <button class='btn btn-success download-link' data-filename="${item.file_surat_keluar}">
-                                <i class="fa-solid fa-download"></i>
-                            </button>
-                            <button type='button' class='btn btn-primary edit-modal' data-toggle='modal' data-target='#EditModal' data-uuid='${item.uuid}'> 
-                                <i class='fa fa-edit'></i>
-                            </button> 
-                            <button type='button' class='btn btn-danger delete-confirm' data-uuid='${item.uuid} '>
-                                <i class='fa fa-trash'></i>
-                            </button> 
-                        </td>
-                    </tr>`
+                            ` <tr>
+                                <td>${(index + 1)}</td>
+                                <td>${item.tujuan_surat}</td>
+                                <td>${item.users.name}</td>
+                                <td>${item.no_surat}</td>
+                                <td>${item.jenis_surat.jenis_surat}</td>
+                                <td>${item.tanggal_surat}</td>
+                                <td>${item.perihal}</td>
+                                <td>
+                                    <button class="btn btn-info download" data-filename="${item.file_surat_keluar}"><i class="fas fa-download"></i></button>
+                                    <button id="edit-modal" data-uuid="${item.uuid}" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
+                                    <button id="delete-confirm" data-uuid="${item.uuid}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>`
                     });
 
+                    // data table
+                    $("#dataTable").DataTable({
+                        "responsive": true,
+                        "lengthChange": true,
+                        "autoWidth": false,
+                    });
                     var table = $("#dataTable").DataTable();
                     table.clear().draw();
                     table.rows.add($(tableBody)).draw();
@@ -150,12 +151,12 @@
                     $("#suratName").text(textName)
 
                     $(document).ready(function() {
-                        $('.download-link').click(function(event) {
+                        $('.download').click(function(event) {
                             event.preventDefault();
 
                             var filename = $(this).data('filename');
                             var downloadUrl =
-                                `{{ asset('uploads/suratKeluar/${filename}') }}`
+                                `{{ asset('uploads/SuratKeluar/${filename}') }}`
 
                             var link = document.createElement('a');
                             link.href = downloadUrl;
@@ -165,6 +166,7 @@
                         });
                     });
                 },
+
                 error: function(error) {
                     console.log(error, "Failed to get data from server");
                 }
@@ -187,7 +189,7 @@
 
             // for update
             function populateSelectOptionsEditt(data) {
-                var select = $("#edit_id_jenis_surat");
+                var select = $("#eid_jenis_surat");
                 select.empty();
                 for (var i = 0; i < data.length; i++) {
                     var option = $("<option>")
@@ -201,32 +203,51 @@
 
 
         //edit
-        $(document).on('click', '.edit-modal', function() {
+        $(document).on('click', '#edit-modal', function() {
             let uuid = $(this).data('uuid');
+            // menampilkan nama file yang baru diisi di form edit data
+            $('#edit_file_surat_keluar').on('change', function() {
+                var fileName = $(this).val().split('\\').pop();
+                $('#edit_file_surat-label').text(fileName);
+
+                // menampilkan gambar
+                if (this.files && this.files[0]) {
+                    const fileEdit = this.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        // Display the image preview
+                        $("#preview-edit").attr("src", e.target.result);
+                    };
+
+                    reader.readAsDataURL(fileEdit);
+                }
+            });
             $.ajax({
                 url: `{{ url('${apiUrl}/get/${uuid}') }}`,
                 type: 'GET',
                 dataType: 'JSON',
-                success: function(response) {
-                    $('#uuid').val(response.data.uuid);
-                    $('#edit_tujuan_surat').val(response.data.tujuan_surat)
-                    $('#edit_no_surat').val(response.data.no_surat)
-                    $('#edit_perihal').val(response.data.perihal)
-                    $('#edit_tanggal_surat').val(response.data.tanggal_surat)
-                    $('#edit_id_jenis_surat').val(response.data.id_jenis_surat)
+                success: function(data) {
+                    console.log('get data =>', data);
+                    $('#uuid').val(data.data.uuid);
+                    $('#edit_tujuan_surat').val(data.data.tujuan_surat)
+                    $('#edit_no_surat').val(data.data.no_surat)
+                    $('#edit_perihal').val(data.data.perihal)
+                    $('#edit_tanggal_surat').val(data.data.tanggal_surat)
+                    $('#eid_jenis_surat').val(data.data.id_jenis_surat)
+                    $('#edit_id_user').val(data.data.id_user)
 
-                    $('#edit_file_surat_keluar').html(response.data.file_surat_keluar)
-                    var filename = response.data.file_surat_keluar.split('/')
-                    $('#edit_file_surat_keluar-label').text(filename)
+                    $('#preview-edit').attr('src', "{{ asset('uploads/SuratKeluar/') }}/" + data.data
+                        .file_surat_keluar);
 
-                    $('#preview').attr('src',
-                        `{{ asset('uploads/suratKeluar/${response.data.file_surat_keluar}') }}`)
-                    // $('#edit_id_user').val(response.data.id_user)
+                    // menampilkan nama file edit yang sudah tersimpan
+                    var fileName = data.data.file_surat_keluar.split('\\').pop();
+                    $('#edit_file_surat-label').text(fileName);
 
                     $('#EditModal').modal('show');
                 },
                 error: function() {
-                    alert("error");
+                    alert("Error fetching data.");
                 }
             });
         });
@@ -296,7 +317,7 @@
         });
 
         //delete
-        $(document).on('click', '.delete-confirm', function(e) {
+        $(document).on('click', '#delete-confirm', function(e) {
             e.preventDefault();
             var uuid = $(this).data('uuid');
             Swal.fire({

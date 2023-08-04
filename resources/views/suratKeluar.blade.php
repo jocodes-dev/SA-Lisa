@@ -18,34 +18,23 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div id="dataTables_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="dataTable" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Tujuan Surat</th>
-                                        <th>Nama pembuat</th>
-                                        <th>No. Surat</th>
-                                        <th>Jenis Surat</th>
-                                        <th>Tanggal Keluar</th>
-                                        <th>Perihal</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody">
+                <table id="dataTable" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tujuan Surat</th>
+                            <th>Nama pembuat</th>
+                            <th>No. Surat</th>
+                            <th>Jenis Surat</th>
+                            <th>Tanggal Keluar</th>
+                            <th>Perihal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTable">
 
-                                    <tr id="loading-row" style="display: none;">
-                                        <td colspan="9" class="text-center">
-                                            <i class="fa fa-spinner fa-spin"></i> Loading...
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
             <!-- /.card-body -->
         </div>
@@ -114,8 +103,6 @@
             </div>
         </div>
     </div>
-    </div>
-
 
     {{-- MODAL EDIT --}}
     <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="EditModalLabel"
@@ -129,7 +116,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="formEdit" method="POST" enctype="multipart/form-data">
+                    <form id="formEdit" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="uuid" id="uuid">
                         <div class="form-group">
@@ -184,91 +171,65 @@
         </div>
     </div>
 
+
     <script>
         const Url = 'v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar';
         const UrlJenisSurat = 'v1/42231a39-a9b8-4781-88cc-1ec4460e5c4d/jenis_surat';
-
         // render data api
         $(document).ready(function() {
             $("#loading-row").show();
-
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                url: `{{ url('${Url}') }}`,
-                success: function(res) {
-                    $("#loading-row").hide();
-
-                    if (res.code === 404) {
-                        // Handle the case when data is not found
-                        $("#tbody").html(`
-                    <tr>
-                        <td colspan="7" class="text-center">No data.</td>
-                    </tr>
-                `);
-                    } else if (res.code === 200) {
-                        // Handle the case when data is available
-                        if (!res.data || res.data.length === 0) {
-                            $("#tbody").html(`
-                        <tr>
-                            <td colspan="7" class="text-center">No data.</td>
-                        </tr>
-                    `);
-                        } else {
-                            // Clear existing content before appending new rows
-                            $("#tbody").empty();
-
-                            // Append each row to the table
-                            res.data.forEach((data, index) => {
-                                const newRow = `
-                            <tr>
-                                <td>${index + 1}</td>
-                                <td>${data.tujuan_surat}</td>
-                                <td>${data.users.name}</td>
-                                <td>${data.no_surat}</td>
-                                <td>${data.jenis_surat.jenis_surat}</td>
-                                <td>${data.tanggal_surat}</td>
-                                <td>${data.perihal}</td>
-                                <td>
-                                    <button class="btn btn-info download" data-filename="${data.file_surat_keluar}"><i class="fas fa-download"></i></button>
-                                    <button id="edit-modal" data-uuid="${data.uuid}" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
-                                    <button id="delete-confirm" data-uuid="${data.uuid}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                        `;
-                                $("#tbody").append(newRow);
-                            });
-                        }
-                    } else {
-                        // Handle other cases or errors
-                        console.log('Error:', res.message);
-                    }
-
-                    // data table
-                    $("#dataTable").DataTable({
-                        "responsive": true,
-                        "lengthChange": true,
-                        "autoWidth": true,
-                    });
-                },
-                error: function(error) {
-                    console.log(error);
-                    $("#loading-row").hide();
-                }
+            var dataTable = $("#dataTable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
             });
+            $.ajax({
+                url: `{{ url('v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar') }}`,
+                method: "GET",
+                dataType: "json",
+                success: function(response) {
+                    let tableBody = "";
+                    $.each(response.data, function(index, item) {
+                        tableBody += /*html*/
+                            `<tr>
+                        <td>${(index + 1)}</td>
+                        <td>${item.tujuan_surat}</td>
+                        <td>${item.users.name}</td>
+                        <td>${item.no_surat}</td>
+                        <td>${item.jenis_surat.jenis_surat}</td>
+                        <td>${item.tanggal_surat}</td>
+                        <td>${item.perihal}</td>
+                        <td>
+                                    <button class="btn btn-info download" data-filename="${item.file_surat_keluar}"><i class="fas fa-download"></i></button>
+                                    <button id="edit-modal" data-uuid="${item.uuid}" class="btn btn-primary" data-toggle='modal' data-target='#EditModal'><i class="far fa-edit"></i></button>
+                                    <button id="delete-confirm" data-uuid="${item.uuid}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                    </tr>`
+                    });
+                    var table = $("#dataTable").DataTable();
+                    table.clear().draw();
+                    table.rows.add($(tableBody)).draw();
 
-            // fungsi download
-            $(document).on('click', '.download', function(event) {
-                event.preventDefault();
+                    $(document).ready(function() {
+                        $('.download').click(function(event) {
+                            event.preventDefault();
 
-                var filename = $(this).data('filename');
-                var downloadUrl = `{{ asset('uploads/suratKeluar/') }}/${filename}`;
+                            var filename = $(this).data('filename');
+                            var downloadUrl =
+                                `{{ asset('uploads/SuratKeluar/${filename}') }}`
 
-                var link = document.createElement('a');
-                link.href = downloadUrl;
-                link.download = filename;
-                link.click();
-                link.remove();
+                            var link = document.createElement('a');
+                            link.href = downloadUrl;
+                            link.download = filename;
+                            link.click();
+                            link.remove();
+                        });
+                    });
+
+                },
+                error: function() {
+                    console.log("Failed to get data from server");
+                }
             });
         });
 
@@ -338,7 +299,7 @@
                 $('#loading-overlay').show();
                 $.ajax({
                     type: 'POST',
-                    url: `{{ url('${Url}/create') }}`,
+                    url: `{{ url('v3/96d6585-16ae-4d04-9549-c499e52b75/surat/keluar/create') }}`,
                     data: formData,
                     dataType: 'JSON',
                     contentType: false,
@@ -449,7 +410,7 @@
             });
         });
 
-        // update
+        //update
         $(document).ready(function() {
             var formEdit = $('#formEdit');
             formEdit.on('submit', function(e) {
@@ -464,14 +425,6 @@
                     dataType: 'json',
                     contentType: false,
                     processData: false,
-                    beforeSend: function() {
-                        $('.btn-update').addClass("disabled").html("Processing...").attr(
-                            'disabled', true);
-                    },
-                    complete: function() {
-                        $('.btn-update').removeClass("disabled").html("Update Data").attr(
-                            'disabled', false);
-                    },
                     success: function(data) {
                         $('#loading-overlay').hide();
                         if (data.message === 'check your validation') {
